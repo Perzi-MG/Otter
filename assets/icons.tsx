@@ -1,5 +1,7 @@
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Feather from '@expo/vector-icons/Feather';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { ColorKeys, AppColors as colors } from '../constants/Colors';
 
 export const MenuIcon = ({ props, color }: { props?: any, color: ColorKeys }) => (
@@ -40,4 +42,10 @@ export const Google = ({ props, color }: { props?: any, color: ColorKeys }) => (
 );
 export const Apple = ({ props, color }: { props?: any, color: ColorKeys }) => (
     <AntDesign name="apple" size={24} color={colors[color]} {...props} />
+);
+export const Facebook = ({ props, color }: { props?: any, color: ColorKeys }) => (
+    <FontAwesome5 name="facebook" size={24} color={colors[color]} {...props} />
+);
+export const Phone = ({ props, color }: { props?: any, color: ColorKeys }) => (
+    <FontAwesome name="phone" size={24} color={colors[color]} {...props} />
 );
