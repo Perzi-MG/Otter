@@ -1,52 +1,29 @@
 import { ArrowBack } from '@/assets/icons';
-import { getAuth } from 'firebase/auth';
-import { doc, getDoc, getFirestore } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
-import { Pressable, Text, View } from 'react-native';
-
-interface userData {
-  birthDate: string;
-  createdAt: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-}
+import { AppColors } from '@/constants/Colors';
+import { useAuth } from '@/context/AuthContext';
+import { ActivityIndicator, Pressable, Text, View } from 'react-native';
 
 export default function Main() {
-  const db = getFirestore();
-  const auth = getAuth();
-  const user = auth.currentUser;
-  const [data, setData] = useState<userData>();
+  const { user, userData, auth, loading } = useAuth();
 
-  const getUserData = async () => {
-    if (user) {
-      const userDocRef = doc(db, 'users', user?.uid);
-      const docSnap = await getDoc(userDocRef);
-      return docSnap.data();
-    }
-    return null;
-  };
+  if (loading) {
+    return (
+      <View className='flex-1 justify-center items-center bg-black/20'>
+        <ActivityIndicator size="large" color={AppColors.aqua} />
+      </View>
+    );
+  }
 
-  useEffect(() => {
-    getUserData().then((result) => {
-      if (result) {
-        setData(result as userData);
-      } else {
-        setData(undefined);
-      }
-    });
-  }, [user]);
-
+  // 3. Mostramos los datos directamente desde el contexto
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text style={{ fontSize: 20 }}>Welcome to the Main Screen!</Text>
       <Text>User ID: {user?.uid}</Text>
-      <Text>Hola {data?.email}</Text>
-      <Text>Hola {data?.firstName}</Text>
-      <Text>Hola {data?.lastName}</Text>
+      <Text>Email: {userData?.email}</Text>
+      <Text>First Name: {userData?.firstName}</Text>
+      <Text>Last Name: {userData?.lastName}</Text>
       <Pressable onPress={() => auth.signOut()}>
-        <ArrowBack color='aqua'/>
+        <ArrowBack color='aqua' />
       </Pressable>
     </View>
   );

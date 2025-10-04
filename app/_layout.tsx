@@ -4,18 +4,18 @@ import { useEffect } from "react";
 import "../global.css";
 
 function RootLayout() {
-  const { user, isLoading } = useAuth();
+  const { user, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLoading) {
+    if (!loading) {
       if (user) {
         router.replace("/main/firstPage");
       } else {
         router.replace("/auth/login");
       }
     }
-  }, [isLoading, user, router]);
+  }, [loading, user, router]);
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
@@ -23,7 +23,7 @@ function RootLayout() {
       <Stack.Screen name="auth/login" />
       <Stack.Screen name="auth/signup" />
       <Stack.Screen name="auth/email-password" />
-      <Stack.Screen name="main/firstPage" />
+      <Stack.Screen name="main" />
     </Stack>
   );
 }

@@ -1,38 +1,71 @@
-
-import { FIREBASE_AUTH } from '@/firebaseConfig';
-import { onAuthStateChanged, User } from 'firebase/auth';
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { getAuth, onAuthStateChanged, Auth, User } from 'firebase/auth';
+import { getFirestore, Firestore, doc, getDoc } from 'firebase/firestore';
+import { FIREBASE_APP } from '@/firebaseConfig';
 
-interface AuthContextType {
-  user: User | null;
-  isLoading: boolean;
+// Re-define userData interface here for the context
+interface userData {
+  birthDate: string;
+  createdAt: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
 }
 
-const AuthContext = createContext<AuthContextType>({
-  user: null,
-  isLoading: true,
-});
+// Define la forma de los datos del contexto
+interface AuthContextType {
+  user: User | null;
+  userData: userData | null; // <-- AÑADIDO
+  auth: Auth;
+  db: Firestore;
+  loading: boolean;
+}
 
+// Crea el contexto con un valor inicial
+const AuthContext = createContext<AuthContextType>({} as AuthContextType);
+
+// Componente Proveedor que envolverá tu aplicación
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [userData, setUserData] = useState<userData | null>(null); // <-- AÑADIDO
+  const [loading, setLoading] = useState(true);
+
+  const auth = getAuth(FIREBASE_APP);
+  const db = getFirestore(FIREBASE_APP);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
-      setIsLoading(false);
+      if (user) {
+        // Usuario ha iniciado sesión, buscamos sus datos
+        const userDocRef = doc(db, 'users', user.uid);
+        const docSnap = await getDoc(userDocRef);
+        if (docSnap.exists()) {
+          setUserData(docSnap.data() as userData);
+        }
+      } else {
+        // Usuario ha cerrado sesión, limpiamos los datos
+        setUserData(null);
+      }
+      setLoading(false);
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [auth, db]);
 
-  return (
-    <AuthContext.Provider value={{ user, isLoading }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  const value = {
+    user,
+    userData, // <-- AÑADIDO
+    auth,
+    db,
+    loading,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
-export const useAuth = () => {
+// Hook personalizado para usar fácilmente el contexto en otros componentes
+export function useAuth() {
   return useContext(AuthContext);
-};
+}

@@ -10,7 +10,7 @@ import { Link, useRouter } from 'expo-router';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { useState } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { initialFormData } from './SignUpScreen';
 
 const formFields = [
@@ -53,7 +53,7 @@ export default function SignUpScreen2() {
 
             await setDoc(doc(db, 'users', user.uid), userData);
 
-            route.navigate('/main/firstPage');
+            route.navigate(`/main/firstPage`);
         } catch (error) {
         }
     }
@@ -88,14 +88,9 @@ export default function SignUpScreen2() {
                             </View>
                         ))}
                     </View>
-                    <Pressable className='h-20 w-full' onPress={() => {
-                        Object.assign(initialFormData, formData);
-                    }}>
-                        <Text>Presionar</Text>
-                    </Pressable>
                     <View className='w-full flex-1 justify-end items-center'>
-                        <LargeButton color='blue' type='navigate' link='/SignUp/EmailPassword' onPress={signUp}>
-                            <Text className='text-white text-lg font-bold'>Continue</Text>
+                        <LargeButton color='blue' type='navigate' onPress={signUp}>
+                            <Text className='text-white text-lg font-bold'>Sign up</Text>
                         </LargeButton>
                     </View>
                 </View>
