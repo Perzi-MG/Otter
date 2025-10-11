@@ -53,7 +53,7 @@ export default function SignUpScreen2() {
 
             await setDoc(doc(db, 'users', user.uid), userData);
 
-            route.navigate(`/main/firstPage`);
+            route.navigate(`/main/home`);
         } catch (error) {
         }
     }

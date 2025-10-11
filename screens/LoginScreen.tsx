@@ -28,7 +28,7 @@ export default function LoginScreen() {
     setLoading(true);
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
-      route.navigate('/main/firstPage');
+      route.navigate('/main/home');
     } catch (error) {
     } finally {
       setLoading(false);

@@ -10,7 +10,7 @@ function RootLayout() {
   useEffect(() => {
     if (!loading) {
       if (user) {
-        router.replace("/main/firstPage");
+        router.replace("/main/home");
       } else {
         router.replace("/auth/login");
       }
