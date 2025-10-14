@@ -17,7 +17,7 @@ export default function ScreenLayout({ children }: ScreenLayoutProps) {
                 colors={[GradientColors.skyBlue, GradientColors.pureWhite, GradientColors.lightMintGreen]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
-                style={{ flex: 1, paddingTop: insets.top, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 25 }}
+                style={{ flex: 1, paddingTop: insets.top, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 25}}
             >
                 {children}
             </LinearGradient>
