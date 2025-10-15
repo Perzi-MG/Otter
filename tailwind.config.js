@@ -13,7 +13,8 @@ module.exports = {
         'brand-gray': '#252526',
         'dark-blue': '#1A6566',
         'light-blue': '#C5C8D9',
-        'brand-white': '#F3F2EC', // Se usa 'brand-white' para no sobreescribir el blanco por defecto de Tailwind
+        'brand-white': '#F3F2EC',
+        'light-white': '#FFFDF6',// Se usa 'brand-white' para no sobreescribir el blanco por defecto de Tailwind
 
         'sky-blue': '#B4E1FF',
         'pure-white': '#FFFFFF',

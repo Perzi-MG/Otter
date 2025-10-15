@@ -7,6 +7,7 @@ export const AppColors = {
   darkBlue: '#1A6566',
   lightBlue: '#C5C8D9',
   white: '#F3F2EC',
+  lightWhite: '#FFFFFF'
 };
 
 export const GradientColors = {

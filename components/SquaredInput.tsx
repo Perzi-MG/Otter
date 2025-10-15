@@ -1,7 +1,7 @@
 import { useRef } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { KeyboardTypeOptions, Text, TextInput, View } from 'react-native';
 
-export default function SquaredInput({ value, label, children }: { value: string | undefined, label: string | undefined, children?: React.ReactNode}) {
+export default function SquaredInput({ value, label, children, onChangeText, keyboardType }: { value: string | undefined, label: string | undefined, children?: React.ReactNode, onChangeText?: ((text: string) => void), keyboardType?: KeyboardTypeOptions }) {
     const inputRef = useRef<TextInput>(null);
 
     return (
@@ -15,9 +15,10 @@ export default function SquaredInput({ value, label, children }: { value: string
                     className='w-full h-full'
                     secureTextEntry={false}
                     ref={inputRef}
-                    placeholder={value}
                     placeholderTextColor='#888'
                     value={value}
+                    onChangeText={onChangeText}
+                    keyboardType={keyboardType}
                 />
             </View>
         </View>

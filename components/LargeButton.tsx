@@ -18,6 +18,8 @@ export function LargeButton({ children, type, link, color, onPress }: LargeButto
         buttonClassName += " bg-transparent border-2 border-gray";
     } else if (color === "blue") {
         buttonClassName += " bg-blue";
+    } else if (color === "aqua") {
+        buttonClassName += " bg-aqua";
     }
 
     const handlePress = () => {
