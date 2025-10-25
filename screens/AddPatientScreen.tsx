@@ -2,22 +2,38 @@ import { Patient } from '@/assets/types'
 import { LargeButton } from '@/components/LargeButton'
 import ScreenLayout from '@/components/ScreenLayout'
 import SquaredInput from '@/components/SquaredInput'
+import { useAuth } from '@/context/AuthContext'
+import { FIRESTORE_DB } from '@/firebaseConfig'
+import { addDoc, collection } from 'firebase/firestore'
 import { useState } from 'react'
 import { KeyboardAvoidingView, Text, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 export default function AddPatientScreen() {
-  const insets = useSafeAreaInsets()
+  const db = FIRESTORE_DB;
+  const {user} = useAuth();
   const [patient, setPatient] = useState<Partial<Patient>>({ Sexo: 'Hombre' })
-  console.log(patient)
   const handleInputChange = (field: keyof Patient, value: string | number) => {
     setPatient(prev => ({ ...prev, [field]: value }))
   }
+  if(!user) {
+    return
+  }
 
-  const handleSubmit = () => {
-    // TODO: Validate and save the patient data
-    console.log(patient)
-    // TODO: Navigate away or show a success message
+  const handleSubmit = async () => {
+    try {
+      const patientData: Patient = {
+        Nombre: patient.Nombre,
+        ApellidoPaterno: patient.ApellidoPaterno,
+        ApellidoMaterno: patient.ApellidoMaterno,
+        FechaNacimiento: patient.FechaNacimiento,
+        Sexo: patient.Sexo,
+        NumeroTelefonico: patient.NumeroTelefonico,
+        Direccion: patient.Direccion,
+        FechaCreacion: new Date().toISOString()
+      };
+      await addDoc(collection(db, 'users', user?.uid, 'patients'), patientData);
+    } catch (error) {
+    }
   }
 
   return (

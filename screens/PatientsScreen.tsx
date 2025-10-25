@@ -1,16 +1,38 @@
 import { MenuIcon, PlusIcon } from '@/assets/icons'
+import { Patient } from '@/assets/types'
 import OnlyIconButton from '@/components/OnlyIconButton'
 import PatientButton from '@/components/PatientButton'
 import ScreenLayout from '@/components/ScreenLayout'
+import { useAuth } from '@/context/AuthContext'
+import { collection, getDocs } from 'firebase/firestore'
+import { useEffect, useState } from 'react'
 import { Text, View } from 'react-native'
-
-const patients = [
-    { 'id': '1', 'name': 'Miguel', 'description': 'Anorexia' },
-    { 'id': '2', 'name': 'Jose', 'description': 'Bulimia' },
-    { 'id': '3', 'name': 'Cesar', 'description': 'Perder peso' },
-    { 'id': '4', 'name': 'Michel', 'description': 'Otra cosa' }
-]
 export default function PatientsScreen() {
+    const { user, db } = useAuth();
+    const [ patientsList, setPatientsList ] = useState<Patient[]>([]);
+    console.log("Patients List: ", patientsList);
+    const getPatientData = async () => {
+        if (!user) return;
+        try {
+            const querySnapshot = await getDocs(collection(db, 'users', user.uid, 'patients'));
+            const patients = querySnapshot.docs.map((doc) => {
+                const allData: Patient = doc.data() as Patient;
+                return {
+                    ID_Paciente: doc.id,
+                    Nombre: allData.Nombre
+                };
+            });
+            setPatientsList(patients);
+        } catch (error) {
+            console.error("Error fetching patients: ", error);
+        }
+    }
+
+    useEffect(()=> {
+        getPatientData();
+    }, [user])
+
+    if (!user) return null;
     return (
         <ScreenLayout
             scroll
@@ -31,8 +53,13 @@ export default function PatientsScreen() {
                 </View>
                 <View className='flex flex-col gap-5 w-full'>
                     <Text className='text-3xl font-semibold text-brand-black'>Recent patients</Text>
-                    {patients.map((patient) => (
-                        <PatientButton key={patient.id} name={patient.name} description={patient.description} id={patient.id} />
+                    {patientsList.map((patient, ind) => (
+                        <PatientButton 
+                            key={ind} 
+                            id={patient.ID_Paciente ?? ''} 
+                            name={patient.Nombre ?? ''} 
+                            description={patient.Nombre ?? ''}
+                        />
                     ))}
                 </View>
             </View>

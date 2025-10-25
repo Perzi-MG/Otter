@@ -20,15 +20,15 @@ export type GradientTextProps = React.PropsWithChildren<{
 export const insets = useSafeAreaInsets()
 
 export interface Patient {
-  ID_Paciente: number;
-  Nombre: string;
-  ApellidoPaterno: string;
-  ApellidoMaterno: string;
-  FechaNacimiento: string;
-  Sexo: 'Hombre' | 'Mujer';
-  FechaCreacion: string;
-  NumeroTelefonico: number;
-  Direccion?: string;
+  ID_Paciente?: string;
+  Nombre?: string;
+  ApellidoPaterno?: string;
+  ApellidoMaterno?: string;
+  FechaNacimiento?: string;
+  Sexo?: 'Hombre' | 'Mujer';
+  FechaCreacion?: string;
+  NumeroTelefonico?: number;
+  Direccion?: any;
 }
 
 export interface Antecedente {

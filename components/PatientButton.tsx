@@ -4,12 +4,12 @@ import { Pressable, Text, View } from 'react-native';
 
 
 
-export default function PatientButton({ name, description, id }: { name: string, description: string, id:string }) {
+export default function PatientButton({ name, description, id }: { name: string, description: string, id:string}) {
     const router = useRouter();
 
     return (
         <Pressable className='w-full flex flex-row justify-between items-center'
-        onPress={() => router.navigate({pathname:`/(app)/(tabs)/patients/[patientId]`, params: { patientId: id }})}
+        onPress={() => router.navigate({pathname:`/patients/[patientId]`, params: {id}})}
         >
             <View className='flex flex-row gap-5 items-center'>
                 <View className='w-14 h-14 rounded-full bg-gray' />

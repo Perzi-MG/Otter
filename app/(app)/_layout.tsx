@@ -2,8 +2,7 @@ import { useAuth } from '@/context/AuthContext';
 import { Stack } from 'expo-router';
 export default function Layout() {
 
-    const {signedIn} = useAuth();
-    console.log("Signed In Status: ", signedIn);
+    const { signedIn } = useAuth();
     return (
         <Stack screenOptions={{ headerShown: false }}>
             <Stack.Protected guard={signedIn}>
