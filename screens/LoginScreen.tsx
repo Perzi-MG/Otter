@@ -5,7 +5,7 @@ import InputButton from '@/components/InputButton';
 import { LargeButton } from '@/components/LargeButton';
 import ScreenLayout from '@/components/ScreenLayout';
 import { FIREBASE_AUTH } from '@/firebaseConfig';
-import { Link, useRouter } from 'expo-router';
+import { Link } from 'expo-router';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
 import { Image, Text, View } from 'react-native';
@@ -22,13 +22,10 @@ export default function LoginScreen() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const auth = FIREBASE_AUTH;
-  const route = useRouter();
-
   const signIn = async () => {
     setLoading(true);
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
-      route.navigate('/main/home');
     } catch (error) {
     } finally {
       setLoading(false);
@@ -37,8 +34,8 @@ export default function LoginScreen() {
 
   return (
     <ScreenLayout>
-      <BlurCard>
-        <View className='flex flex-col w-full items-center justify-center gap-5'>
+      <BlurCard intensity={70} px={20}>
+        <View className='flex flex-col w-full h-[90%] items-center justify-center gap-5'>
 
           <Image source={require('../assets/images/Logo.png')} className='w-52 h-52' />
           <Text className='text-4xl font-bold text-gray'>Inicia sesión</Text>
@@ -63,7 +60,7 @@ export default function LoginScreen() {
           </View>
           <View className="flex flex-row justify-between w-full px-2">
             <Text>Remember me</Text>
-            <Link href={"/auth/signup"}>Forgot password?</Link>
+            <Link href={"/signup"}>Forgot password?</Link>
           </View>
           <LargeButton color='blue' type='navigate' onPress={signIn}>
             <Text className='text-white text-lg font-bold'>Login</Text>
@@ -80,7 +77,7 @@ export default function LoginScreen() {
               </IconButton>
             ))}
           </View>
-          <Text>Don't have an account? <Link href={"/auth/signup"} className='font-bold text-blue'>Sign Up</Link></Text>
+          <Text>Don't have an account? <Link href={"/signup"} className='font-bold text-blue'>Sign Up</Link></Text>
         </View>
       </BlurCard>
     </ScreenLayout>

@@ -14,7 +14,6 @@ export default function PatientIdScreen({ id }: { id: string | string[] }) {
     scroll: {
       alignItems: 'center',
       gap: 20,
-      paddingTop: insets.top,
       paddingHorizontal: 25,
     }
   })

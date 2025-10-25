@@ -2,7 +2,7 @@ import { ButtonProps } from "@/assets/types";
 import { useRouter } from "expo-router";
 import { Pressable } from "react-native";
 
-export default function OnlyIconButton({ children, type, link }: ButtonProps) {
+export default function OnlyIconButton({ children, type, link, onPress }: ButtonProps) {
     const router = useRouter();
     return (
         <Pressable
@@ -13,6 +13,9 @@ export default function OnlyIconButton({ children, type, link }: ButtonProps) {
                     router.navigate(link as any);
                 } else if (type === "push" && link) {
                     router.push(link as any);
+                }
+                if (onPress) {
+                    onPress();
                 }
             }}
         >

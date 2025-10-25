@@ -6,7 +6,7 @@ import { LargeButton } from '@/components/LargeButton';
 import OnlyIconButton from '@/components/OnlyIconButton';
 import ScreenLayout from '@/components/ScreenLayout';
 import { FIREBASE_AUTH, FIRESTORE_DB } from '@/firebaseConfig';
-import { Link, useRouter } from 'expo-router';
+import { Link } from 'expo-router';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { useState } from 'react';
@@ -30,8 +30,6 @@ export default function SignUpScreen2() {
     });
     const auth = FIREBASE_AUTH;
     const db = FIRESTORE_DB;
-    const route = useRouter()
-
     const handleInputChange = (name: string, value: string) => {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
@@ -49,11 +47,7 @@ export default function SignUpScreen2() {
                 email: formData.email,
                 createdAt: new Date()
             };
-
-
             await setDoc(doc(db, 'users', user.uid), userData);
-
-            route.navigate(`/main/home`);
         } catch (error) {
         }
     }
@@ -63,8 +57,8 @@ export default function SignUpScreen2() {
 
     return (
         <ScreenLayout>
-            <BlurCard>
-                <View className='w-full h-full flex flex-col justify-start items-center gap-4 py-7'>
+            <BlurCard intensity={70} px={20}>
+                <View className='w-full h-[90%] flex flex-col justify-start items-center gap-4'>
                     <View className='self-start w-full'>
                         <OnlyIconButton type='back'>
                             <ArrowBack color='aqua' />
@@ -72,7 +66,7 @@ export default function SignUpScreen2() {
                     </View>
                     <GradientText text='Regístrate' />
                     <Text>
-                        Already have an account? <Link className='text-aqua ' href={'/auth/login'}>Login</Link>
+                        Already have an account? <Link className='text-aqua ' href={'/login'}>Login</Link>
                     </Text>
 
                     <View className='flex flex-col justify-between w-full'>

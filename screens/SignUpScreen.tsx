@@ -54,16 +54,16 @@ export default function SignUpScreen() {
 
     return (
         <ScreenLayout>
-            <BlurCard>
-                <View className='w-full h-full flex flex-col justify-start items-center gap-4 py-7'>
-                    <View className='self-start w-full'>
+            <BlurCard intensity={70} px={20}>
+                <View className='w-full h-[90%] flex flex-col justify-start items-center gap-4'>
+                    <View className='w-full items-start'>
                         <OnlyIconButton type='back'>
                             <ArrowBack color='aqua' />
                         </OnlyIconButton>
                     </View>
                     <GradientText text='Regístrate' />
                     <Text>
-                        Already have an account? <Link className='text-aqua ' href={'/auth/login'}>Login</Link>
+                        Already have an account? <Link className='text-aqua ' href={'/login'}>Login</Link>
                     </Text>
 
                     <View className='flex flex-row flex-wrap justify-between w-full'>
@@ -83,7 +83,7 @@ export default function SignUpScreen() {
                     <View className='w-full flex-1 justify-end items-center'>
                         <LargeButton color='blue' type='navigate' onPress={() => {
                             Object.assign(initialFormData, formData);
-                            route.navigate('/auth/email-password');
+                            route.navigate('/email-password');
                         }}>
                             <Text className='text-white text-lg font-bold'>Continue</Text>
                         </LargeButton>

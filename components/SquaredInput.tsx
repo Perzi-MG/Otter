@@ -1,3 +1,4 @@
+import { BlurView } from 'expo-blur';
 import { useRef } from 'react';
 import { KeyboardTypeOptions, Text, TextInput, View } from 'react-native';
 
@@ -7,9 +8,12 @@ export default function SquaredInput({ value, label, children, onChangeText, key
     return (
         <View className='flex-col gap-1'>
             <Text className='text-brand-black text-md'>{label}</Text>
-            <View
-                className='flex w-full h-16 bg-white rounded-lg px-6 items-start justify-center border border-aqua'
+            <BlurView
+                tint='systemChromeMaterialLight'
+                intensity={70}
+                className='flex-col w-full h-16 flex justify-center items-center overflow-hidden rounded-3xl border border-blue px-5'
             >
+
                 {children}
                 <TextInput
                     className='w-full h-full'
@@ -20,7 +24,7 @@ export default function SquaredInput({ value, label, children, onChangeText, key
                     onChangeText={onChangeText}
                     keyboardType={keyboardType}
                 />
-            </View>
+            </BlurView>
         </View>
     )
 }

@@ -1,4 +1,4 @@
-import { PlusIcon } from '@/assets/icons'
+import { MenuIcon, PlusIcon } from '@/assets/icons'
 import OnlyIconButton from '@/components/OnlyIconButton'
 import PatientButton from '@/components/PatientButton'
 import ScreenLayout from '@/components/ScreenLayout'
@@ -12,13 +12,20 @@ const patients = [
 ]
 export default function PatientsScreen() {
     return (
-        <ScreenLayout>
+        <ScreenLayout
+            scroll
+            overlay={
+                <OnlyIconButton type='navigate' link='/patients/add'>
+                    <PlusIcon color='blue' />
+                </OnlyIconButton>
+            }
+        >
             <View className='w-full flex-1 pt-5 flex-col gap-10'>
                 <View className='relative flex-row justify-center items-center w-full'>
                     <Text className='text-2xl font-bold text-brand-black'>Patients</Text>
                     <View className='absolute right-0'>
-                        <OnlyIconButton type='navigate' link='/main/patients/add'>
-                            <PlusIcon color='aqua' />
+                        <OnlyIconButton>
+                            <MenuIcon color='brandBlack' />
                         </OnlyIconButton>
                     </View>
                 </View>

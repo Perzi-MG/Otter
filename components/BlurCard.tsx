@@ -1,10 +1,11 @@
 import { BlurView } from 'expo-blur'
-export default function BlurCard({children}: {children?: React.ReactNode}) {
+export default function BlurCard({ children, intensity, py, px }: { children?: React.ReactNode, intensity: number, py?: number, px?: number }) {
   return (
     <BlurView
-      tint='extraLight'
-      intensity={60}
-      className='px-8 w-full h-[90%] flex justify-center items-center rounded-[40px] overflow-hidden border border-gray'
+      tint='systemChromeMaterialLight'
+      intensity={intensity}
+      className='flex-col w-full h-auto flex justify-center items-center overflow-hidden rounded-3xl'
+      style={{ boxShadow: '0 7px 10px rgba(0, 0, 0, 0.1)', paddingVertical: py, paddingHorizontal: px }}
     >
       {children}
     </BlurView>
