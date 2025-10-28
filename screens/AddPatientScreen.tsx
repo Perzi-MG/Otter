@@ -2,24 +2,32 @@ import { Patient } from '@/assets/types'
 import { LargeButton } from '@/components/LargeButton'
 import ScreenLayout from '@/components/ScreenLayout'
 import SquaredInput from '@/components/SquaredInput'
+import { AppColors } from '@/constants/Colors'
 import { useAuth } from '@/context/AuthContext'
 import { FIRESTORE_DB } from '@/firebaseConfig'
+import { useRouter } from 'expo-router'
 import { addDoc, collection } from 'firebase/firestore'
 import { useState } from 'react'
-import { KeyboardAvoidingView, Text, View } from 'react-native'
+import { ActivityIndicator, KeyboardAvoidingView, Platform, Text, View } from 'react-native'
 
 export default function AddPatientScreen() {
   const db = FIRESTORE_DB;
-  const {user} = useAuth();
+  const router = useRouter();
+  const { user } = useAuth();
   const [patient, setPatient] = useState<Partial<Patient>>({ Sexo: 'Hombre' })
+  const [loading, setLoading] = useState(false);
+
   const handleInputChange = (field: keyof Patient, value: string | number) => {
     setPatient(prev => ({ ...prev, [field]: value }))
   }
-  if(!user) {
-    return
+
+  if (!user) {
+    return null
   }
 
   const handleSubmit = async () => {
+    if (!user) return;
+    setLoading(true);
     try {
       const patientData: Patient = {
         Nombre: patient.Nombre,
@@ -31,17 +39,27 @@ export default function AddPatientScreen() {
         Direccion: patient.Direccion,
         FechaCreacion: new Date().toISOString()
       };
-      await addDoc(collection(db, 'users', user?.uid, 'patients'), patientData);
+      await addDoc(collection(db, 'users', user.uid, 'patients'), patientData);
+      router.push('/patients');
     } catch (error) {
+      console.error('Error guardando paciente:', error);
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
-      behavior={'padding'}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
+      {loading && (
+        <View className='bg-black/50 absolute inset-0 justify-center items-center z-50'>
+          <ActivityIndicator size="large" color={AppColors.white} />
+        </View>
+      )}
       <ScreenLayout scroll>
+
         <View className='flex-1 flex-col justify-center gap-5 mt-10 mb-16'>
           <Text className="text-3xl font-bold self-center">Añadir Paciente</Text>
           <SquaredInput

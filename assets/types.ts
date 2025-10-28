@@ -31,6 +31,11 @@ export interface Patient {
   Direccion?: any;
 }
 
+export type RawPatient = {
+  ID_Paciente?: string;
+  Nombre?: string;
+}
+
 export interface Antecedente {
   ID_Antecedente: number;
   ID_Paciente: number;

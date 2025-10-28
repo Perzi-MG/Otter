@@ -57,9 +57,9 @@ export default function ScreenLayout({ children, scroll = false, overlay }: Scre
                     flex: 1,
                     paddingTop: insets.top,
                     paddingBottom: insets.bottom,
-                    justifyContent: 'flex-start',
-                    alignItems: 'stretch',
-                    paddingHorizontal: 25
+                    alignItems: 'center',
+                    paddingHorizontal: 25,
+                    justifyContent: 'center'
                 }}
             >
                 {children}
