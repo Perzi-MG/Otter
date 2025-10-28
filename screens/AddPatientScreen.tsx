@@ -8,7 +8,7 @@ import { FIRESTORE_DB } from '@/firebaseConfig'
 import { useRouter } from 'expo-router'
 import { addDoc, collection } from 'firebase/firestore'
 import { useState } from 'react'
-import { ActivityIndicator, KeyboardAvoidingView, Platform, Text, View } from 'react-native'
+import { ActivityIndicator, Text, View } from 'react-native'
 
 export default function AddPatientScreen() {
   const db = FIRESTORE_DB;
@@ -49,10 +49,7 @@ export default function AddPatientScreen() {
   }
 
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1 }}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    >
+    <>
       {loading && (
         <View className='bg-black/50 absolute inset-0 justify-center items-center z-50'>
           <ActivityIndicator size="large" color={AppColors.white} />
@@ -104,6 +101,6 @@ export default function AddPatientScreen() {
           </LargeButton>
         </View>
       </ScreenLayout>
-    </KeyboardAvoidingView>
+    </>
   )
 }
