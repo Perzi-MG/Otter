@@ -19,7 +19,7 @@ export default function HomeScreen() {
           </OnlyIconButton>
         </View>
         <View className='flex-1 gap-10'>
-          <BlurCard intensity={90} py={15} px={10}>
+          <BlurCard intensity={30} py={15} px={10}>
             <View className='flex-row justify-center items-center gap-5'>
               <View className='w-24 h-24 rounded-full bg-white p-1'>
                 <View className='w-full h-full rounded-full bg-gray' />
@@ -37,7 +37,7 @@ export default function HomeScreen() {
           </BlurCard>
           <View className='flex-col gap-1'>
             <Text className='font-bold text-lg'>Resumen rápido</Text>
-            <BlurCard intensity={90} py={20} px={15}>
+            <BlurCard intensity={30} py={20} px={15}>
               <View className='flex-row items-center w-full justify-between'>
                 <View className='flex-col gap-1'>
                   <Text className='text-3xl font-bold'>5</Text>
@@ -53,13 +53,13 @@ export default function HomeScreen() {
           </View>
           <View className='flex-col gap-3'>
             <Text className='font-bold text-lg'>Notificaciones importantes</Text>
-            <BlurCard intensity={90} py={20} px={10}>
+            <BlurCard intensity={30} py={20} px={10}>
               <View className='w-full flex-row items-center gap-3'>
                 <Notification color='brandBlack' />
                 <Text>Notificacion</Text>
               </View>
             </BlurCard>
-            <BlurCard intensity={90} py={20} px={10}>
+            <BlurCard intensity={30} py={20} px={10}>
               <View className='w-full flex-row items-center gap-3'>
                 <Notification color='brandBlack' />
                 <Text>Notificacion</Text>
