@@ -9,6 +9,8 @@ import { useRouter } from 'expo-router'
 import { addDoc, collection } from 'firebase/firestore'
 import { useState } from 'react'
 import { ActivityIndicator, Text, View } from 'react-native'
+import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
+
 
 export default function AddPatientScreen() {
   const db = FIRESTORE_DB;
@@ -51,9 +53,12 @@ export default function AddPatientScreen() {
   return (
     <>
       {loading && (
-        <View className='bg-black/50 absolute inset-0 justify-center items-center z-50'>
+        <Animated.View
+          entering={FadeIn.duration(300)}
+          exiting={FadeOut.duration(200)}
+          className='bg-black/30 absolute inset-0 justify-center items-center z-50'>
           <ActivityIndicator size="large" color={AppColors.white} />
-        </View>
+        </Animated.View>
       )}
       <ScreenLayout scroll>
 

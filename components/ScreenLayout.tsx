@@ -7,9 +7,10 @@ interface ScreenLayoutProps {
     children: React.ReactNode;
     scroll?: boolean;
     overlay?: React.ReactNode;
+    paddingHorizontal?: boolean;
 }
 
-export default function ScreenLayout({ children, scroll = false, overlay }: ScreenLayoutProps) {
+export default function ScreenLayout({ children, scroll = false, overlay, paddingHorizontal = true }: ScreenLayoutProps) {
     const insets = useSafeAreaInsets();
 
     if (scroll) {
@@ -58,7 +59,7 @@ export default function ScreenLayout({ children, scroll = false, overlay }: Scre
                     paddingTop: insets.top,
                     paddingBottom: insets.bottom,
                     alignItems: 'center',
-                    paddingHorizontal: 25,
+                    ...(paddingHorizontal && { paddingHorizontal: 25 }),
                     justifyContent: 'center'
                 }}
             >
