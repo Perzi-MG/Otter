@@ -8,6 +8,7 @@ import { getPatientData } from '@/hooks/get'
 import { useEffect, useState } from 'react'
 import { FlatList, Text, View } from 'react-native'
 import { PatientsLoader } from '@/components/Skeletons'
+import IconButton from '@/components/IconButton'
 
 export default function PatientsScreen() {
     const { user, db } = useAuth();
@@ -29,9 +30,9 @@ export default function PatientsScreen() {
     return (
         <ScreenLayout
             overlay={
-                <OnlyIconButton type='navigate' link='/patients/add'>
+                <IconButton type='navigate' link='/patients/add'>
                     <PlusIcon color='blue' />
-                </OnlyIconButton>
+                </IconButton>
             }
         >
 

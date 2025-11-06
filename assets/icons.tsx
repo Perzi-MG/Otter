@@ -11,13 +11,16 @@ export const MenuIcon = ({ props, color }: { props?: any, color: ColorKeys }) =>
 export const SearchIcon = ({ props, color }: { props?: any, color: ColorKeys }) => (
     <Feather name="search" size={28} color={colors[color]} {...props} />
 );
+export const CalendarIcon = ({ props, color }: { props?: any, color: ColorKeys }) => (
+    <Feather name="calendar" size={28} color={colors[color]} {...props} />
+);
 
 export const MinusIcon = ({ props, color }: { props?: any, color: ColorKeys }) => (
     <Feather name="minus-circle" size={28} color={colors[color]} {...props} />
 );
 
 export const PlusIcon = ({ props, color }: { props?: any, color: ColorKeys }) => (
-    <FontAwesome6 name="circle-plus" size={50} color={colors[color]} {...props} />
+    <Feather name="plus" size={28} color={colors[color]} {...props} />
 );
 
 export const CheckIcon = ({ props, color }: { props?: any, color: ColorKeys }) => (
