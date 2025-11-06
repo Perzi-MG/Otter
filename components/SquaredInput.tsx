@@ -2,7 +2,7 @@ import { BlurView } from 'expo-blur';
 import { useRef } from 'react';
 import { KeyboardTypeOptions, Text, TextInput, View } from 'react-native';
 
-export default function SquaredInput({ value, label, children, onChangeText, keyboardType }: { value: string | undefined, label: string | undefined, children?: React.ReactNode, onChangeText?: ((text: string) => void), keyboardType?: KeyboardTypeOptions }) {
+export default function SquaredInput({ value, label, children, onChangeText, keyboardType }: { value: any, label: string | undefined, children?: React.ReactNode, onChangeText?: ((text: string) => void), keyboardType?: KeyboardTypeOptions }) {
     const inputRef = useRef<TextInput>(null);
 
     return (

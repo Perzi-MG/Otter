@@ -92,7 +92,7 @@ export default function AddPatientScreen() {
           <SquaredInput
             label="Número Telefónico"
             value={patient.NumeroTelefonico?.toString() || ''}
-            onChangeText={(text) => handleInputChange('NumeroTelefonico', parseInt(text) || 0)}
+            onChangeText={(text) => handleInputChange('NumeroTelefonico', text)}
             keyboardType="phone-pad"
           />
           <SquaredInput

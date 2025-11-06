@@ -28,6 +28,7 @@ export default function PatientIdScreen({ id }: { id: any }) {
       .finally(() => setLoading(false));
   }, [user, db, id]);
 
+  console.log("Patient data: ", patient);
   return (
     <>
       {loading && (
@@ -38,7 +39,6 @@ export default function PatientIdScreen({ id }: { id: any }) {
           <ActivityIndicator size="large" color={AppColors.white} />
         </Animated.View>
       )}
-
       <ScreenLayout scroll>
         <View className='flex-col gap-7'>
           <View className='relative flex-row justify-center items-center w-full'>
@@ -51,7 +51,7 @@ export default function PatientIdScreen({ id }: { id: any }) {
           </View>
           <View className='w-full flex-row flex-wrap justify-between gap-y-4'>
             <View className='w-[48%]'>
-              <SquaredInput value={patient?.ApellidoMaterno} label='Peso (kg)' />
+              <SquaredInput value={patient?.NumeroTelefonico} label='Peso (kg)' />
             </View>
             <View className='w-[48%]'>
               <SquaredInput value={patient?.ApellidoMaterno} label='Altura (cm)' />
