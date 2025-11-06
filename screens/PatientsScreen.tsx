@@ -7,14 +7,23 @@ import { useAuth } from '@/context/AuthContext'
 import { getPatientData } from '@/hooks/get'
 import { useEffect, useState } from 'react'
 import { FlatList, Text, View } from 'react-native'
+import { PatientsLoader } from '@/components/Skeletons'
+
 export default function PatientsScreen() {
     const { user, db } = useAuth();
     const [patientsList, setPatientsList] = useState<RawPatient[]>([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        getPatientData(user, db).then((data) => {
-            setPatientsList(data as RawPatient[]);
-        })
+        setLoading(true);
+        getPatientData(user, db)
+            .then((data) => {
+                setPatientsList(data as RawPatient[]);
+            })
+            .catch(error => {
+                console.error("Error fetching patients list: ", error);
+            })
+            .finally(() => setLoading(false));
     }, [user])
 
     return (
@@ -25,6 +34,7 @@ export default function PatientsScreen() {
                 </OnlyIconButton>
             }
         >
+
             <View className='w-full flex-1 pt-5 flex-col gap-10 pb-10'>
                 <View className='relative flex-row justify-center items-center w-full'>
                     <Text className='text-2xl font-bold text-brand-black'>Patients</Text>
@@ -34,11 +44,15 @@ export default function PatientsScreen() {
                         </OnlyIconButton>
                     </View>
                 </View>
-                <FlatList
-                    showsVerticalScrollIndicator={false}
-                    data={patientsList}
-                    renderItem={({ item }) => <PatientButton name={item.Nombre} description={item.Nombre} id={item.ID_Paciente} />}
-                    className='flex flex-col gap-5 w-full' />
+                {loading ? (
+                    <PatientsLoader />
+                ) : (
+                    <FlatList
+                        showsVerticalScrollIndicator={false}
+                        data={patientsList}
+                        renderItem={({ item }) => <PatientButton name={item.Nombre} description={item.Nombre} id={item.ID_Paciente} />}
+                        className='flex flex-col gap-5 w-full' />
+                )}
             </View>
         </ScreenLayout>
     )
