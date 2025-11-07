@@ -1,11 +1,25 @@
-import ScreenLayout from '@/components/ScreenLayout'
-import { View, Text } from 'react-native'
+import DropdownComponent from '@/components/Dropdown';
+import ScreenLayout from '@/components/ScreenLayout';
+import { useAuth } from '@/context/AuthContext';
+import usePatientList from '@/hooks/get';
+import { useState } from 'react';
+
+
 export default function SetApointmentScreen() {
+  const { user, db } = useAuth()
+  const [value, setValue] = useState(null);
+  const { patients } = usePatientList(user, db)
+
   return (
     <ScreenLayout>
-      <View>
-        <Text>SetApointmentScreen</Text>
-      </View>
+        <DropdownComponent
+          data={patients}
+          placeholder='Seleccione un paciente'
+          value={value}
+          onChange={(item) => {
+            setValue(item)
+          }}
+        />
     </ScreenLayout>
   )
 }

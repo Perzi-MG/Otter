@@ -5,12 +5,10 @@ import PatientData from '@/components/PatientData';
 import ScreenLayout from '@/components/ScreenLayout';
 import { PatientDataLoader } from '@/components/Skeletons';
 import SquaredInput from '@/components/SquaredInput';
-import { AppColors } from '@/constants/Colors';
 import { useAuth } from '@/context/AuthContext';
 import { fetchPatientData } from '@/hooks/get';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Text, View } from 'react-native';
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import { Text, View } from 'react-native';
 
 export default function PatientIdScreen({ id }: { id: any }) {
   const { user, db } = useAuth();
@@ -29,8 +27,6 @@ export default function PatientIdScreen({ id }: { id: any }) {
       })
       .finally(() => setLoading(false));
   }, [user, db, id]);
-
-  console.log("Patient data: ", patient);
   return (
     <ScreenLayout scroll>
       {loading ? (

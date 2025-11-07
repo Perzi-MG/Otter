@@ -1,5 +1,10 @@
 import { Patient } from "@/assets/types";
+import { useAuth } from "@/context/AuthContext";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { useEffect, useState } from "react";
+
+const { user, db } = useAuth();
+
 
 export async function fetchPatientData(user: any, db: any, id: any) {
   if (!user) return;
@@ -15,21 +20,35 @@ export async function fetchPatientData(user: any, db: any, id: any) {
   }
 }
 
-export async function getPatientData(user: any, db: any) {
-  if (!user) return [];
-  try {
-    const patientDocRef = collection(db, 'users', user.uid, 'patients');
-    const patientSnapshot = await getDocs(patientDocRef);
-    const result: { ID_Paciente: string; Nombre: string }[] = patientSnapshot.docs.map((doc) => {
-      const data = doc.data() as any;
-      return {
-        ID_Paciente: doc.id,
-        Nombre: data.Nombre.toString()
+
+const usePatientList = (user: any, db: any) => {
+  const [patients, setPatients] = useState<any>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const getPatients = async () => {
+      setError(null);
+      if (!user) return;
+      try {
+        const patientSnapshot = await getDocs(collection(db, 'users', user.uid, 'patients'));
+        const formatedPatients = patientSnapshot.docs.map((doc) => {
+          const data = doc.data() as any;
+          return {
+            label: data.Nombre ? data.Nombre.toString() : 'Paciente sin nombre',
+            value: doc.id,
+          }
+        });
+        setPatients(formatedPatients);
+      } catch (error) {
+        console.error("Error fetching patients: ", error);
+      } finally {
+        setLoading(false);
       }
-    })
-    return result;
-  } catch (error) {
-    console.error("Error fetching patients: ", error);
-    return [];
-  }
-}
+    };
+    getPatients();
+  }, [user, db]);
+  return { patients, loading, error };
+};
+
+export default usePatientList;

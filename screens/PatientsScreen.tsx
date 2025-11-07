@@ -1,31 +1,16 @@
 import { MenuIcon, PlusIcon } from '@/assets/icons'
-import { RawPatient } from '@/assets/types'
+import IconButton from '@/components/IconButton'
 import OnlyIconButton from '@/components/OnlyIconButton'
 import PatientButton from '@/components/PatientButton'
 import ScreenLayout from '@/components/ScreenLayout'
-import { useAuth } from '@/context/AuthContext'
-import { getPatientData } from '@/hooks/get'
-import { useEffect, useState } from 'react'
-import { FlatList, Text, View } from 'react-native'
 import { PatientsLoader } from '@/components/Skeletons'
-import IconButton from '@/components/IconButton'
+import { useAuth } from '@/context/AuthContext'
+import usePatientList from '@/hooks/get'
+import { FlatList, Text, View } from 'react-native'
 
-export default function PatientsScreen() {
+const PatientsScreen = () => {
     const { user, db } = useAuth();
-    const [patientsList, setPatientsList] = useState<RawPatient[]>([]);
-    const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        setLoading(true);
-        getPatientData(user, db)
-            .then((data) => {
-                setPatientsList(data as RawPatient[]);
-            })
-            .catch(error => {
-                console.error("Error fetching patients list: ", error);
-            })
-            .finally(() => setLoading(false));
-    }, [user])
+    const { patients, loading } = usePatientList(user, db)
 
     return (
         <ScreenLayout
@@ -50,11 +35,13 @@ export default function PatientsScreen() {
                 ) : (
                     <FlatList
                         showsVerticalScrollIndicator={false}
-                        data={patientsList}
-                        renderItem={({ item }) => <PatientButton name={item.Nombre} description={item.Nombre} id={item.ID_Paciente} />}
+                        data={patients}
+                        renderItem={({ item }) => <PatientButton name={item.label} description={item.label} id={item.value} />}
                         className='flex flex-col gap-5 w-full' />
                 )}
             </View>
         </ScreenLayout>
     )
-}
+};
+
+export default PatientsScreen;
