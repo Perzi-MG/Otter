@@ -2,7 +2,6 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import Feather from '@expo/vector-icons/Feather';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { ColorKeys, AppColors as colors } from '../constants/Colors';
 
 export const MenuIcon = ({ props, color }: { props?: any, color: ColorKeys }) => (
@@ -37,6 +36,9 @@ export const ArrowBack = ({ props, color }: { props?: any, color: ColorKeys }) =
 
 export const ArrowNext = ({ props, color }: { props?: any, color: ColorKeys }) => (
     <Feather name="chevron-right" size={24} color={colors[color]} {...props} />
+);
+export const ArrowDown = ({ props, color }: { props?: any, color: ColorKeys }) => (
+    <Feather name="chevron-down" size={24} color={colors[color]} {...props} />
 );
 
 export const Mail = ({ props, color }: { props?: any, color: ColorKeys }) => (

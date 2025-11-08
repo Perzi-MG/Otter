@@ -36,6 +36,12 @@ export type RawPatient = {
   Nombre?: string;
 }
 
+export type ApointmentData = {
+  Id_patient?: string;
+  date?: string;
+  hour?: string;
+}
+
 export interface Antecedente {
   ID_Antecedente: number;
   ID_Paciente: number;
