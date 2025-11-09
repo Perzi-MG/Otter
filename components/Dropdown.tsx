@@ -90,7 +90,7 @@ export default function Dropdown(
                 style={[
                     dropdownAnimatedStyle
                 ]}
-                className='flex-col border border-blue rounded-3xl justify-start items-start overflow-hidden w-full'>
+                className='flex-col border border-blue rounded-3xl justify-start items-start overflow-hidden w-full bg-white/50'>
                 <Pressable
                     onPress={toggleDropdown}
                     className='h-16 w-full flex-row items-center justify-between border-b boder-black px-5'>

@@ -84,9 +84,8 @@ export default function SignUpScreen() {
                         <LargeButton color='blue' type='navigate' onPress={() => {
                             Object.assign(initialFormData, formData);
                             route.navigate('/email-password');
-                        }}>
-                            <Text className='text-white text-lg font-bold'>Continue</Text>
-                        </LargeButton>
+                        }}
+                        text='Continuar'/>
                     </View>
                 </View>
             </BlurCard>

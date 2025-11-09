@@ -8,6 +8,7 @@ export type ButtonProps = React.PropsWithChildren<{
     type?: "back" | "navigate" | "push";
     color?: "blue" | "transparent-blue" | "transparent-white" | "aqua";
     onPress?: () => void;
+    text?: string;
 }>;
 
 export type GradientTextProps = React.PropsWithChildren<{

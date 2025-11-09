@@ -1,13 +1,13 @@
 import { ButtonProps } from "@/assets/types";
 import { useRouter } from "expo-router";
 import React from "react";
-import { Pressable } from "react-native";
+import { Pressable, Text } from "react-native";
 
 interface LargeButtonProps extends ButtonProps {
     onPress?: () => void;
 }
 
-export function LargeButton({ children, type, link, color, onPress }: LargeButtonProps) {
+export function LargeButton({ children, type, link, color, onPress, text }: LargeButtonProps) {
     const router = useRouter();
 
     let buttonClassName =
@@ -40,6 +40,7 @@ export function LargeButton({ children, type, link, color, onPress }: LargeButto
             className={buttonClassName}
             onPress={handlePress}
         >
+            <Text className='text-white text-lg font-bold'>{text}</Text>
             {children}
         </Pressable>
     );

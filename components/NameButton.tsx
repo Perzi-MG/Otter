@@ -17,7 +17,7 @@ export default function NameButton({ name, id, onPress }: { name: string | any, 
         >
             <View className='flex flex-row gap-5 items-center'>
                 <View className='gap-1 flex flex-col justify-star items-start'>
-                    <Text className='text-xl font-semibold text-brand-black'>{name}</Text>
+                    <Text className='text-xl text-brand-black'>{name}</Text>
                 </View>
             </View>
         </Pressable>

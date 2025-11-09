@@ -98,9 +98,7 @@ export default function SignUpScreen2() {
                             ))}
                         </View>
                         <View className='w-full flex-1 justify-end items-center'>
-                            <LargeButton color='blue' type='navigate' onPress={signUp}>
-                                <Text className='text-white text-lg font-bold'>Sign up</Text>
-                            </LargeButton>
+                            <LargeButton color='blue' type='navigate' onPress={signUp} text='Sign up'/>
                         </View>
                     </View>
                 </BlurCard>

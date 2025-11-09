@@ -102,9 +102,7 @@ export default function AddPatientScreen() {
             onChangeText={(text) => handleInputChange('Direccion', text)}
           />
 
-          <LargeButton onPress={handleSubmit} color='aqua'>
-            <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>Guardar Paciente</Text>
-          </LargeButton>
+          <LargeButton onPress={handleSubmit} color='aqua' text='Guardar paciente'/>
         </View>
       </ScreenLayout>
     </>

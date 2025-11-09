@@ -73,9 +73,7 @@ export default function LoginScreen() {
               <Text>Remember me</Text>
               <Link href={"/signup"}>Forgot password?</Link>
             </View>
-            <LargeButton color='blue' type='navigate' onPress={signIn}>
-              <Text className='text-white text-lg font-bold'>Login</Text>
-            </LargeButton>
+            <LargeButton color='blue' type='navigate' onPress={signIn} text='Login' />
             <View className="flex flex-row items-center w-full my-2 gap-3">
               <View className='flex-1 h-[2px] bg-black/30 rounded-full' />
               <Text className="mx-2 text-gray-500 font-semibold">Or login with</Text>
