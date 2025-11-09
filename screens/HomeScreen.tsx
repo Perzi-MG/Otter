@@ -1,5 +1,6 @@
-import { MenuIcon, Notification } from '@/assets/icons';
+import { CalendarIcon, MenuIcon, Notification } from '@/assets/icons';
 import BlurCard from '@/components/BlurCard';
+import IconButton from '@/components/IconButton';
 import OnlyIconButton from '@/components/OnlyIconButton';
 import ScreenLayout from '@/components/ScreenLayout';
 import { useAuth } from '@/context/AuthContext';
@@ -7,7 +8,11 @@ import { Pressable, Text, View } from 'react-native';
 export default function HomeScreen() {
   const { auth, userData } = useAuth();
   return (
-    <ScreenLayout scroll>
+    <ScreenLayout scroll overlay={
+      <IconButton type='navigate' link='/home/setApointment'>
+        <CalendarIcon color='blue' />
+      </IconButton>
+    }>
       <View className='flex-1 pt-5 w-full gap-16'>
         <View className='flex-row justify-between w-full items-center'>
           <View className='flex-col'>

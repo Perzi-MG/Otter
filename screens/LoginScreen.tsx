@@ -46,7 +46,7 @@ export default function LoginScreen() {
       )}
       <ScreenLayout>
         <BlurCard intensity={70} px={20}>
-          <View className='flex flex-col w-full h-[90%] items-center justify-center gap-5'>
+          <View className='flex flex-col w-full h-[90%] items-center justify-center gap-4'>
 
             <Image source={require('../assets/images/Logo.png')} className='w-52 h-52' />
             <Text className='text-4xl font-bold text-gray'>Inicia sesión</Text>

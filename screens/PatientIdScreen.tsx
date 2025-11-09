@@ -3,18 +3,18 @@ import { Patient } from '@/assets/types';
 import OnlyIconButton from '@/components/OnlyIconButton';
 import PatientData from '@/components/PatientData';
 import ScreenLayout from '@/components/ScreenLayout';
+import { PatientDataLoader } from '@/components/Skeletons';
 import SquaredInput from '@/components/SquaredInput';
-import { AppColors } from '@/constants/Colors';
 import { useAuth } from '@/context/AuthContext';
 import { fetchPatientData } from '@/hooks/get';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Text, View } from 'react-native';
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import { Text, View } from 'react-native';
 
 export default function PatientIdScreen({ id }: { id: any }) {
   const { user, db } = useAuth();
   const [patient, setPatient] = useState<Patient>();
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     setLoading(true);
     fetchPatientData(user, db, id)
@@ -27,19 +27,11 @@ export default function PatientIdScreen({ id }: { id: any }) {
       })
       .finally(() => setLoading(false));
   }, [user, db, id]);
-
   return (
-    <>
-      {loading && (
-        <Animated.View
-          entering={FadeIn.duration(300)}
-          exiting={FadeOut.duration(200)}
-          className='bg-black/30 absolute inset-0 justify-center items-center z-50'>
-          <ActivityIndicator size="large" color={AppColors.white} />
-        </Animated.View>
-      )}
-
-      <ScreenLayout scroll>
+    <ScreenLayout scroll>
+      {loading ? (
+        <PatientDataLoader />
+      ) : (
         <View className='flex-col gap-7'>
           <View className='relative flex-row justify-center items-center w-full'>
             <View className='absolute left-0'>
@@ -51,7 +43,7 @@ export default function PatientIdScreen({ id }: { id: any }) {
           </View>
           <View className='w-full flex-row flex-wrap justify-between gap-y-4'>
             <View className='w-[48%]'>
-              <SquaredInput value={patient?.ApellidoMaterno} label='Peso (kg)' />
+              <SquaredInput value={patient?.NumeroTelefonico} label='Peso (kg)' />
             </View>
             <View className='w-[48%]'>
               <SquaredInput value={patient?.ApellidoMaterno} label='Altura (cm)' />
@@ -82,8 +74,8 @@ export default function PatientIdScreen({ id }: { id: any }) {
             <PatientData patientData={patient?.ApellidoMaterno} dataName='KNP/g N2' />
           </View>
         </View>
-      </ScreenLayout>
-    </>
+      )}
+    </ScreenLayout>
   )
 
 }

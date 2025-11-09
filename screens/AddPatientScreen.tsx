@@ -5,8 +5,8 @@ import SquaredInput from '@/components/SquaredInput'
 import { AppColors } from '@/constants/Colors'
 import { useAuth } from '@/context/AuthContext'
 import { FIRESTORE_DB } from '@/firebaseConfig'
+import { addPatient } from '@/hooks/post'
 import { useRouter } from 'expo-router'
-import { addDoc, collection } from 'firebase/firestore'
 import { useState } from 'react'
 import { ActivityIndicator, Text, View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
@@ -30,24 +30,14 @@ export default function AddPatientScreen() {
   const handleSubmit = async () => {
     if (!user) return;
     setLoading(true);
-    try {
-      const patientData: Patient = {
-        Nombre: patient.Nombre,
-        ApellidoPaterno: patient.ApellidoPaterno,
-        ApellidoMaterno: patient.ApellidoMaterno,
-        FechaNacimiento: patient.FechaNacimiento,
-        Sexo: patient.Sexo,
-        NumeroTelefonico: patient.NumeroTelefonico,
-        Direccion: patient.Direccion,
-        FechaCreacion: new Date().toISOString()
-      };
-      await addDoc(collection(db, 'users', user.uid, 'patients'), patientData);
-      router.push('/patients');
-    } catch (error) {
-      console.error('Error guardando paciente:', error);
-    } finally {
-      setLoading(false);
-    }
+    addPatient(patient, user, db)
+      .then(() =>
+        router.push('/patients')
+      )
+      .catch(error => {
+        console.error("Error fetching patient data: ", error);
+      })
+      .finally(() => setLoading(false))
   }
 
   return (
@@ -92,7 +82,7 @@ export default function AddPatientScreen() {
           <SquaredInput
             label="Número Telefónico"
             value={patient.NumeroTelefonico?.toString() || ''}
-            onChangeText={(text) => handleInputChange('NumeroTelefonico', parseInt(text) || 0)}
+            onChangeText={(text) => handleInputChange('NumeroTelefonico', text)}
             keyboardType="phone-pad"
           />
           <SquaredInput

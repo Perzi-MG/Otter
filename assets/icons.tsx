@@ -2,7 +2,6 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import Feather from '@expo/vector-icons/Feather';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { ColorKeys, AppColors as colors } from '../constants/Colors';
 
 export const MenuIcon = ({ props, color }: { props?: any, color: ColorKeys }) => (
@@ -11,13 +10,16 @@ export const MenuIcon = ({ props, color }: { props?: any, color: ColorKeys }) =>
 export const SearchIcon = ({ props, color }: { props?: any, color: ColorKeys }) => (
     <Feather name="search" size={28} color={colors[color]} {...props} />
 );
+export const CalendarIcon = ({ props, color }: { props?: any, color: ColorKeys }) => (
+    <Feather name="calendar" size={28} color={colors[color]} {...props} />
+);
 
 export const MinusIcon = ({ props, color }: { props?: any, color: ColorKeys }) => (
     <Feather name="minus-circle" size={28} color={colors[color]} {...props} />
 );
 
 export const PlusIcon = ({ props, color }: { props?: any, color: ColorKeys }) => (
-    <FontAwesome6 name="circle-plus" size={50} color={colors[color]} {...props} />
+    <Feather name="plus" size={28} color={colors[color]} {...props} />
 );
 
 export const CheckIcon = ({ props, color }: { props?: any, color: ColorKeys }) => (
@@ -34,6 +36,9 @@ export const ArrowBack = ({ props, color }: { props?: any, color: ColorKeys }) =
 
 export const ArrowNext = ({ props, color }: { props?: any, color: ColorKeys }) => (
     <Feather name="chevron-right" size={24} color={colors[color]} {...props} />
+);
+export const ArrowDown = ({ props, color }: { props?: any, color: ColorKeys }) => (
+    <Feather name="chevron-down" size={24} color={colors[color]} {...props} />
 );
 
 export const Mail = ({ props, color }: { props?: any, color: ColorKeys }) => (
