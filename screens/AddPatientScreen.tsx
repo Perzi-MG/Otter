@@ -1,8 +1,10 @@
 import { Patient } from '@/assets/types'
+import Dropdown from '@/components/Dropdown'
 import { LargeButton } from '@/components/LargeButton'
 import ScreenLayout from '@/components/ScreenLayout'
 import SquaredInput from '@/components/SquaredInput'
 import { AppColors } from '@/constants/Colors'
+import { Sexo } from '@/constants/Lists'
 import { useAuth } from '@/context/AuthContext'
 import { FIRESTORE_DB } from '@/firebaseConfig'
 import { addPatient } from '@/hooks/post'
@@ -19,6 +21,7 @@ export default function AddPatientScreen() {
   const [patient, setPatient] = useState<Partial<Patient>>({ Sexo: 'Hombre' })
   const [loading, setLoading] = useState(false);
 
+  console.log(patient)
   const handleInputChange = (field: keyof Patient, value: string | number) => {
     setPatient(prev => ({ ...prev, [field]: value }))
   }
@@ -69,11 +72,19 @@ export default function AddPatientScreen() {
             value={patient.ApellidoMaterno || ''}
             onChangeText={(text) => handleInputChange('ApellidoMaterno', text)}
           />
-          <SquaredInput
+          <Dropdown placeholder='Fecha de nacimiento' type='date' onValueChange={(text) => handleInputChange('FechaNacimiento', text)} />
+          {/* <SquaredInput
             label="Fecha de Nacimiento (YYYY-MM-DD)"
             value={patient.FechaNacimiento || ''}
             onChangeText={(text) => handleInputChange('FechaNacimiento', text)}
-          />
+          /> */}
+          <Dropdown
+            maxHeight={180}
+            scrollEnabled={false}
+            placeholder='Sexo'
+            type='list'
+            data={Sexo}
+            onValueChange={(text) => handleInputChange('Sexo', text)} />
           <SquaredInput
             label="Sexo ('Hombre' o 'Mujer')"
             value={patient.Sexo || ''}

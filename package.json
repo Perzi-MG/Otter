@@ -17,28 +17,17 @@
     "@react-native-firebase/firestore": "^23.4.0",
     "@react-native-masked-view/masked-view": "^0.3.2",
     "@react-navigation/native": "^7.1.8",
-<<<<<<< HEAD
-    "expo": "^54.0.22",
-=======
     "expo": "54.0.22",
->>>>>>> 70bb1386a3f58a91b7dfbf3f31b363b3bf54dd5d
     "expo-blur": "~15.0.7",
     "expo-build-properties": "~1.0.9",
     "expo-constants": "^18.0.10",
     "expo-font": "^14.0.9",
     "expo-linear-gradient": "~15.0.7",
     "expo-linking": "~8.0.8",
-<<<<<<< HEAD
-    "expo-router": "^6.0.14",
-    "expo-splash-screen": "~31.0.10",
-    "expo-status-bar": "~3.0.8",
-    "expo-web-browser": "^15.0.9",
-=======
     "expo-router": "~6.0.14",
     "expo-splash-screen": "~31.0.10",
     "expo-status-bar": "~3.0.8",
     "expo-web-browser": "~15.0.9",
->>>>>>> 70bb1386a3f58a91b7dfbf3f31b363b3bf54dd5d
     "firebase": "^12.3.0",
     "nativewind": "^4.2.1",
     "react": "19.1.0",

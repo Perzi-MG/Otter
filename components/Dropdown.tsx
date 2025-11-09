@@ -2,16 +2,26 @@ import { AppColors } from '@/constants/Colors'
 import Feather from '@expo/vector-icons/Feather'
 import RNDateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker'
 import { useState } from 'react'
-import { FlatList, Pressable, Text } from 'react-native'
+import { FlatList, Pressable, Text, View } from 'react-native'
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated'
 import NameButton from './NameButton'
 
-const INITIAL_HEIGHT = 55
-const EXPANDED_HEIGHT = 300
 
 const AnimatedFeather = Animated.createAnimatedComponent(Feather);
 
-export default function Dropdown({ data, placeholder, onValueChange, type }: { data?: any, placeholder?: string, onValueChange: (value: string) => void, type: 'list' | 'date' | 'time' }) {
+export default function Dropdown(
+    { data, placeholder, onValueChange, type, minHeight, maxHeight, scrollEnabled }:
+        {
+            data?: any,
+            placeholder?: string,
+            onValueChange: (value: string) => void,
+            type: 'list' | 'date' | 'time',
+            minHeight?: number,
+            maxHeight?: number,
+            scrollEnabled?: boolean | true
+        }) {
+    const INITIAL_HEIGHT = minHeight || 55
+    const EXPANDED_HEIGHT = maxHeight || 300
     const animatedHeight = useSharedValue(INITIAL_HEIGHT)
     const animatedArrowRotation = useSharedValue(0)
     const [isExpanded, setIsExpanded] = useState(false)
@@ -55,8 +65,6 @@ export default function Dropdown({ data, placeholder, onValueChange, type }: { d
             const dateString = date.toISOString();
             onValueChange(dateString);
             setSelected(date.toLocaleDateString());
-            toggleDropdown();
-
         }
         if (event.type === 'dismissed') {
             toggleDropdown();
@@ -68,7 +76,6 @@ export default function Dropdown({ data, placeholder, onValueChange, type }: { d
             const timeString = date.toISOString();
             onValueChange(timeString);
             setSelected(date.toLocaleTimeString());
-            toggleDropdown();
 
         }
         if (event.type === 'dismissed') {
@@ -77,33 +84,37 @@ export default function Dropdown({ data, placeholder, onValueChange, type }: { d
     };
 
     return (
-        <Animated.View
-            style={[
-                dropdownAnimatedStyle
-            ]}
-            className='flex-col border border-black rounded-3xl justify-start items-start overflow-hidden w-full'>
-            <Pressable
-                onPress={toggleDropdown}
-                className='h-16 w-full flex-row items-center justify-between border-b boder-black px-10'>
-                <Text className='text-xl font-semibold'>{selected}</Text>
-                <AnimatedFeather style={arrowAnimatedStyle} name="chevron-down" size={24} color={AppColors.brandBlack} />
-            </Pressable>
+        <View className='flex-col gap-1'>
+            <Text className='text-brand-black text-md'>{placeholder}</Text>
+            <Animated.View
+                style={[
+                    dropdownAnimatedStyle
+                ]}
+                className='flex-col border border-blue rounded-3xl justify-start items-start overflow-hidden w-full'>
+                <Pressable
+                    onPress={toggleDropdown}
+                    className='h-16 w-full flex-row items-center justify-between border-b boder-black px-5'>
+                    <Text className=''>{selected}</Text>
+                    <AnimatedFeather style={arrowAnimatedStyle} name="chevron-down" size={24} color={AppColors.brandBlack} />
+                </Pressable>
 
-            {type === 'list' ? (
-                <FlatList
-                    showsVerticalScrollIndicator={false}
-                    data={data}
-                    renderItem={({ item }) => <NameButton name={item.label} id={item.value} onPress={() => { setSelected(item.label); toggleDropdown(); onValueChange(item.value) }} />}
-                    className='flex flex-col gap-5 w-full' />
-            ) : (
-                <RNDateTimePicker
-                    themeVariant='light'
-                    value={appointmentDate}
-                    mode={type}
-                    display='spinner'
-                    onChange={type === 'date' ? handleDateChange : type === 'time' ? handleTimeChange : handleDateChange} />
-            )
-            }
-        </Animated.View>
+                {type === 'list' ? (
+                    <FlatList
+                    scrollEnabled={scrollEnabled}
+                        showsVerticalScrollIndicator={false}
+                        data={data}
+                        renderItem={({ item }) => <NameButton name={item.label} id={item.value} onPress={() => { setSelected(item.label); toggleDropdown(); onValueChange(item.value) }} />}
+                        className='flex flex-col gap-5 w-full' />
+                ) : (
+                    <RNDateTimePicker
+                        themeVariant='light'
+                        value={appointmentDate}
+                        mode={type}
+                        display='spinner'
+                        onChange={type === 'date' ? handleDateChange : type === 'time' ? handleTimeChange : handleDateChange} />
+                )
+                }
+            </Animated.View>
+        </View>
     )
 }

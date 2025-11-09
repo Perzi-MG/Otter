@@ -1,4 +1,4 @@
-import { Patient } from "@/assets/types";
+import { ApointmentData, Patient } from "@/assets/types";
 import { addDoc, collection } from "firebase/firestore";
 
 export async function addPatient(patientData: Patient, user: any, db: any) {
@@ -17,6 +17,18 @@ export async function addPatient(patientData: Patient, user: any, db: any) {
         return
     } catch (error) {
         console.error('Error guardando paciente:', error);
+        return null
+    }
+}
+export async function addAppointment(appointmentData: ApointmentData | undefined, user: any, db: any) {
+    try {
+        const appointment: ApointmentData = {
+            ...appointmentData,
+        };
+        await addDoc(collection(db, 'users', user.uid, 'appointments'), appointment);
+        return
+    } catch (error) {
+        console.error('Error guardando cita:', error);
         return null
     }
 }

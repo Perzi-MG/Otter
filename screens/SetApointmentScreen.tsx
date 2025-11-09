@@ -1,17 +1,23 @@
 import { ArrowBack } from '@/assets/icons';
 import { ApointmentData } from '@/assets/types';
 import DropdownComponent from '@/components/Dropdown';
+import { LargeButton } from '@/components/LargeButton';
 import OnlyIconButton from '@/components/OnlyIconButton';
 import ScreenLayout from '@/components/ScreenLayout';
 import { useAuth } from '@/context/AuthContext';
 import usePatientList from '@/hooks/get';
+import { addAppointment } from '@/hooks/post';
+import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { Text, View } from 'react-native';
 
 export default function SetApointmentScreen() {
+
+  const router = useRouter()
   const { user, db } = useAuth()
   const { patients } = usePatientList(user, db)
   const [data, setData] = useState<ApointmentData>()
+  const [loading, setLoading] = useState(false)
 
   console.log(data)
   const handleValueChange = (newValue: any) => {
@@ -32,6 +38,19 @@ export default function SetApointmentScreen() {
       hour: newValue
     }))
   }
+
+    const handleSubmit = async () => {
+      if (!user) return;
+      setLoading(true);
+      addAppointment(data, user, db)
+        .then(() =>
+          router.push('/home')
+        )
+        .catch(error => {
+          console.error("Error posting appointment data: ", error);
+        })
+        .finally(() => setLoading(false))
+    }
 
   return (
     <ScreenLayout>
@@ -56,6 +75,8 @@ export default function SetApointmentScreen() {
           placeholder='Seleccionar hora'
           type='time'
           onValueChange={handleTimeChange} />
+
+          <LargeButton type='navigate' color='blue' onPress={handleSubmit}/>
       </View>
     </ScreenLayout>
   )
