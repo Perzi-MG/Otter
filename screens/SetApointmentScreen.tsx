@@ -69,7 +69,6 @@ export default function SetApointmentScreen() {
             placeholder='Seleccionar hora'
             type='time'
             onValueChange={handleTimeChange} />
-
           <LargeButton type='navigate' color='blue' onPress={handleSubmit} text='Confirmar cita' />
         </View>
       </View>

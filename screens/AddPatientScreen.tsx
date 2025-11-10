@@ -73,11 +73,6 @@ export default function AddPatientScreen() {
             onChangeText={(text) => handleInputChange('ApellidoMaterno', text)}
           />
           <Dropdown placeholder='Fecha de nacimiento' type='date' onValueChange={(text) => handleInputChange('FechaNacimiento', text)} />
-          {/* <SquaredInput
-            label="Fecha de Nacimiento (YYYY-MM-DD)"
-            value={patient.FechaNacimiento || ''}
-            onChangeText={(text) => handleInputChange('FechaNacimiento', text)}
-          /> */}
           <Dropdown
             maxHeight={180}
             scrollEnabled={false}
@@ -85,11 +80,6 @@ export default function AddPatientScreen() {
             type='list'
             data={Sexo}
             onValueChange={(text) => handleInputChange('Sexo', text)} />
-          <SquaredInput
-            label="Sexo ('Hombre' o 'Mujer')"
-            value={patient.Sexo || ''}
-            onChangeText={(text) => handleInputChange('Sexo', text)}
-          />
           <SquaredInput
             label="Número Telefónico"
             value={patient.NumeroTelefonico?.toString() || ''}
@@ -102,7 +92,7 @@ export default function AddPatientScreen() {
             onChangeText={(text) => handleInputChange('Direccion', text)}
           />
 
-          <LargeButton onPress={handleSubmit} color='aqua' text='Guardar paciente'/>
+          <LargeButton onPress={handleSubmit} color='aqua' text='Guardar paciente' />
         </View>
       </ScreenLayout>
     </>

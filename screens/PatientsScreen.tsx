@@ -1,5 +1,5 @@
 import { MenuIcon, PlusIcon } from '@/assets/icons'
-import IconButton from '@/components/IconButton'
+import ExpandButton from '@/components/ExpandButton'
 import OnlyIconButton from '@/components/OnlyIconButton'
 import PatientButton from '@/components/PatientButton'
 import ScreenLayout from '@/components/ScreenLayout'
@@ -7,6 +7,7 @@ import { PatientsLoader } from '@/components/Skeletons'
 import { useAuth } from '@/context/AuthContext'
 import usePatientList from '@/hooks/get'
 import { FlatList, Text, View } from 'react-native'
+import AddPatientScreen from './AddPatientScreen'
 
 const PatientsScreen = () => {
     const { user, db } = useAuth();
@@ -15,9 +16,12 @@ const PatientsScreen = () => {
     return (
         <ScreenLayout
             overlay={
-                <IconButton type='navigate' link='/patients/add'>
-                    <PlusIcon color='blue' />
-                </IconButton>
+                <ExpandButton icon={<PlusIcon color='aqua' />}>
+                    <AddPatientScreen />
+                </ExpandButton>
+                // <IconButton type='navigate' link='/patients/add'>
+                //     <PlusIcon color='blue' />
+                // </IconButton>
             }
         >
 

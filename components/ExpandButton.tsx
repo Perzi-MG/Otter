@@ -21,7 +21,8 @@ export default function ExpandButton(
     const dropdownAnimatedStyle = useAnimatedStyle(() => {
         return {
             height: animatedHeight.value,
-            width: animatedWidth.value
+            width: animatedWidth.value,
+            boxShadow: '0 7px 10px rgba(0, 0, 0, 0.1)'
         }
     })
 
@@ -45,7 +46,7 @@ export default function ExpandButton(
             style={[
                 dropdownAnimatedStyle
             ]}
-            className='flex-col border border-blue rounded-3xl justify-center items-center overflow-hidden w-full bg-black/50'>
+            className='flex-col rounded-3xl justify-center items-center overflow-hidden w-full'>
 
             {isExpanded === true ? (
                 <Pressable className='w-16 h-16 absolute z-10 flex justify-center items-center left-1 top-10' onPress={toggleDropdown}>
