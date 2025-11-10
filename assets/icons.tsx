@@ -50,6 +50,9 @@ export const Lock = ({ props, color }: { props?: any, color: ColorKeys }) => (
 export const Notification = ({ props, color }: { props?: any, color: ColorKeys }) => (
     <Feather name="bell" size={28} color={colors[color]} {...props} />
 );
+export const Cancel = ({ props, color }: { props?: any, color: ColorKeys }) => (
+    <Feather name="x" size={28} color={colors[color]} {...props} />
+);
 export const Google = ({ props, color }: { props?: any, color: ColorKeys }) => (
     <AntDesign name="google" size={24} color={colors[color]} {...props} />
 );

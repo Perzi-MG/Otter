@@ -1,8 +1,6 @@
-import { ArrowBack } from '@/assets/icons';
 import { ApointmentData } from '@/assets/types';
 import DropdownComponent from '@/components/Dropdown';
 import { LargeButton } from '@/components/LargeButton';
-import OnlyIconButton from '@/components/OnlyIconButton';
 import ScreenLayout from '@/components/ScreenLayout';
 import { useAuth } from '@/context/AuthContext';
 import usePatientList from '@/hooks/get';
@@ -39,44 +37,41 @@ export default function SetApointmentScreen() {
     }))
   }
 
-    const handleSubmit = async () => {
-      if (!user) return;
-      setLoading(true);
-      addAppointment(data, user, db)
-        .then(() =>
-          router.push('/home')
-        )
-        .catch(error => {
-          console.error("Error posting appointment data: ", error);
-        })
-        .finally(() => setLoading(false))
-    }
+  const handleSubmit = async () => {
+    if (!user) return;
+    setLoading(true);
+    addAppointment(data, user, db)
+      .then(() =>
+        router.push('/home')
+      )
+      .catch(error => {
+        console.error("Error posting appointment data: ", error);
+      })
+      .finally(() => setLoading(false))
+  }
 
   return (
     <ScreenLayout>
-      <View className='flex-1 flex-col gap-10 w-full'>
-        <View className='flex-row justify-between items-center w-full'>
-          <OnlyIconButton type='back'>
-            <ArrowBack color='brandBlack' />
-          </OnlyIconButton>
-          <Text className='text-3xl font-bold'>Agregar Cita</Text>
-        </View>
-        <DropdownComponent
-          data={patients}
-          placeholder={"Seleccione un paciente"}
-          onValueChange={handleValueChange}
-          type='list'
-        />
-        <DropdownComponent
-          placeholder='Seleccionar fecha'
-          type='date'
-          onValueChange={handleDateChange} />
-        <DropdownComponent
-          placeholder='Seleccionar hora'
-          type='time'
-          onValueChange={handleTimeChange} />
+      <View className='flex-1 flex-col gap-10'>
+        <Text className='text-3xl font-bold left-28'>Agregar Cita</Text>
+        <View className='flex-col gap-10'>
+          <DropdownComponent
+            data={patients}
+            placeholder={"Seleccione un paciente"}
+            onValueChange={handleValueChange}
+            type='list'
+          />
+          <DropdownComponent
+            placeholder='Seleccionar fecha'
+            type='date'
+            onValueChange={handleDateChange} />
+          <DropdownComponent
+            placeholder='Seleccionar hora'
+            type='time'
+            onValueChange={handleTimeChange} />
 
-          <LargeButton type='navigate' color='blue' onPress={handleSubmit}/>
+          <LargeButton type='navigate' color='blue' onPress={handleSubmit} text='Confirmar cita' />
+        </View>
       </View>
     </ScreenLayout>
   )
