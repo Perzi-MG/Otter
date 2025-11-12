@@ -21,7 +21,6 @@ export default function AddPatientScreen() {
   const [patient, setPatient] = useState<Partial<Patient>>({ Sexo: 'Hombre' })
   const [loading, setLoading] = useState(false);
 
-  console.log(patient)
   const handleInputChange = (field: keyof Patient, value: string | number) => {
     setPatient(prev => ({ ...prev, [field]: value }))
   }
@@ -35,12 +34,12 @@ export default function AddPatientScreen() {
     setLoading(true);
     addPatient(patient, user, db)
       .then(() =>
-        router.push('/patients')
+        router.push('/(app)/(tabs)/patients')
       )
       .catch(error => {
         console.error("Error fetching patient data: ", error);
       })
-      .finally(() => setLoading(false))
+      .finally(() => {setLoading(false), setPatient})
   }
 
   return (
@@ -63,12 +62,12 @@ export default function AddPatientScreen() {
             onChangeText={(text) => handleInputChange('Nombre', text)}
           />
           <SquaredInput
-            label="Apellido Paterno"
+            label="Primer apellido"
             value={patient.ApellidoPaterno || ''}
             onChangeText={(text) => handleInputChange('ApellidoPaterno', text)}
           />
           <SquaredInput
-            label="Apellido Materno"
+            label="Segundo apellido"
             value={patient.ApellidoMaterno || ''}
             onChangeText={(text) => handleInputChange('ApellidoMaterno', text)}
           />

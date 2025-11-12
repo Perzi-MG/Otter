@@ -1,7 +1,12 @@
 import { Cancel } from '@/assets/icons';
 import React, { useState } from 'react';
-import { Pressable } from 'react-native';
+import { Dimensions, Pressable } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
+
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
+
+const EXPANDED_WIDTH = SCREEN_WIDTH * 0.9;
+const EXPANDED_HEIGHT = SCREEN_HEIGHT * 0.85;
 
 export default function ExpandButton(
     { children, icon }:
@@ -11,8 +16,6 @@ export default function ExpandButton(
         }) {
     const INITIAL_HEIGHT = 55
     const INITIAL_WIDTH = 55
-    const EXPANDED_WIDTH = 350
-    const EXPANDED_HEIGHT = 720
     const animatedHeight = useSharedValue(INITIAL_HEIGHT)
     const animatedWidth = useSharedValue(INITIAL_WIDTH)
     const [isExpanded, setIsExpanded] = useState(false)

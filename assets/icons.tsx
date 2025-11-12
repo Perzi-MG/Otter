@@ -2,6 +2,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import Feather from '@expo/vector-icons/Feather';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { ColorKeys, AppColors as colors } from '../constants/Colors';
 
 export const MenuIcon = ({ props, color }: { props?: any, color: ColorKeys }) => (
@@ -11,7 +12,7 @@ export const SearchIcon = ({ props, color }: { props?: any, color: ColorKeys }) 
     <Feather name="search" size={28} color={colors[color]} {...props} />
 );
 export const CalendarIcon = ({ props, color }: { props?: any, color: ColorKeys }) => (
-    <Feather name="calendar" size={28} color={colors[color]} {...props} />
+    <MaterialCommunityIcons name="calendar-plus" size={28} color={colors[color]} {...props} />
 );
 
 export const MinusIcon = ({ props, color }: { props?: any, color: ColorKeys }) => (
@@ -44,6 +45,12 @@ export const ArrowDown = ({ props, color }: { props?: any, color: ColorKeys }) =
 export const Mail = ({ props, color }: { props?: any, color: ColorKeys }) => (
     <Feather name="mail" size={28} color={colors[color]} {...props} />
 );
+export const Users = ({ props, color }: { props?: any, color: ColorKeys }) => (
+    <Feather name="users" size={28} color={colors[color]} {...props} />
+);
+export const Gear = ({ props, color }: { props?: any, color: ColorKeys }) => (
+    <Feather name="gear" size={28} color={colors[color]} {...props} />
+);
 export const Lock = ({ props, color }: { props?: any, color: ColorKeys }) => (
     <Feather name="lock" size={28} color={colors[color]} {...props} />
 );
@@ -62,6 +69,12 @@ export const Apple = ({ props, color }: { props?: any, color: ColorKeys }) => (
 export const Facebook = ({ props, color }: { props?: any, color: ColorKeys }) => (
     <FontAwesome5 name="facebook" size={24} color={colors[color]} {...props} />
 );
+export const PersonPlus = ({ props, color }: { props?: any, color: ColorKeys }) => (
+    <FontAwesome5 name="user-plus" size={24} color={colors[color]} {...props} />
+);
 export const Phone = ({ props, color }: { props?: any, color: ColorKeys }) => (
     <FontAwesome name="phone" size={24} color={colors[color]} {...props} />
+);
+export const Home = ({ props, color }: { props?: any, color: ColorKeys }) => (
+    <FontAwesome name="Home" size={24} color={colors[color]} {...props} />
 );

@@ -1,7 +1,6 @@
-import { CalendarIcon, MenuIcon, Notification } from '@/assets/icons';
+import { CalendarIcon, Notification } from '@/assets/icons';
 import BlurCard from '@/components/BlurCard';
 import ExpandButton from '@/components/ExpandButton';
-import OnlyIconButton from '@/components/OnlyIconButton';
 import ScreenLayout from '@/components/ScreenLayout';
 import { useAuth } from '@/context/AuthContext';
 import { Pressable, Text, View } from 'react-native';
@@ -23,9 +22,6 @@ export default function HomeScreen() {
             <Text className='text-2xl font-medium'>Bienvenido,</Text>
             <Text className='text-3xl font-bold'>{userData?.firstName}</Text>
           </View>
-          <OnlyIconButton onPress={() => auth.signOut()}>
-            <MenuIcon color='brandBlack' />
-          </OnlyIconButton>
         </View>
         <View className='flex-1 gap-10'>
           <BlurCard intensity={30} py={15} px={10}>

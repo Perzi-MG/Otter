@@ -17,7 +17,6 @@ export default function SetApointmentScreen() {
   const [data, setData] = useState<ApointmentData>()
   const [loading, setLoading] = useState(false)
 
-  console.log(data)
   const handleValueChange = (newValue: any) => {
     setData(prevData => ({
       ...prevData,
