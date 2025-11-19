@@ -40,7 +40,7 @@ export default function ScreenLayout({ children, scroll = false, overlay, paddin
                 </ScrollView>
 
                 {overlay ? (
-                    <View style={{ position: 'absolute', right: 20, bottom: insets.bottom + 40, zIndex: 20 }}>
+                    <View style={{ position: 'absolute', right: 20, bottom: insets.bottom + 60, zIndex: 20 }}>
                         {overlay}
                     </View>
                 ) : null}

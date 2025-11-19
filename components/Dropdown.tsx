@@ -70,13 +70,15 @@ export default function Dropdown(
             toggleDropdown();
         }
     };
+
     const handleTimeChange = (event: DateTimePickerEvent, date?: Date) => {
         if (event.type === 'set' && date) {
             setAppointmentDate(date);
-            const timeString = date.toISOString();
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            const timeString = `${hours}:${minutes}`;
             onValueChange(timeString);
-            setSelected(date.toLocaleTimeString());
-
+            setSelected(timeString);
         }
         if (event.type === 'dismissed') {
             toggleDropdown();
@@ -100,7 +102,7 @@ export default function Dropdown(
 
                 {type === 'list' ? (
                     <FlatList
-                    scrollEnabled={scrollEnabled}
+                        scrollEnabled={scrollEnabled}
                         showsVerticalScrollIndicator={false}
                         data={data}
                         renderItem={({ item }) => <NameButton name={item.label} id={item.value} onPress={() => { setSelected(item.label); toggleDropdown(); onValueChange(item.value) }} />}
