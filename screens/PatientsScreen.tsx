@@ -2,12 +2,12 @@ import PatientButton from '@/components/PatientButton'
 import ScreenLayout from '@/components/ScreenLayout'
 import { PatientsLoader } from '@/components/Skeletons'
 import { useAuth } from '@/context/AuthContext'
-import usePatientList from '@/hooks/get'
+import { usePatientList2 } from '@/hooks/get'
 import { FlatList, Text, View } from 'react-native'
 
 const PatientsScreen = () => {
     const { user, db } = useAuth();
-    const { patients, loading } = usePatientList(user, db)
+    const { patients, loading } = usePatientList2(user, db)
 
     return (
         <ScreenLayout
