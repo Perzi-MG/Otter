@@ -1,14 +1,6 @@
-import { MenuIcon } from '@/assets/icons';
-import OnlyIconButton from '@/components/OnlyIconButton';
-import { useAuth } from '@/context/AuthContext';
-import { View } from 'react-native';
+import SettingsScreen from '@/screens/SettingsScreen';
 export default function index() {
-  const { auth } = useAuth();
   return (
-    <View>
-      <OnlyIconButton onPress={() => auth.signOut()}>
-        <MenuIcon color='brandBlack' />
-      </OnlyIconButton>
-    </View>
+    <SettingsScreen />
   )
 }

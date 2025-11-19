@@ -1,6 +1,5 @@
-import { Apple, Facebook, Google, Lock, Phone, User } from '@/assets/icons';
+import { Lock, User } from '@/assets/icons';
 import BlurCard from '@/components/BlurCard';
-import IconButton from '@/components/IconButton';
 import InputButton from '@/components/InputButton';
 import { LargeButton } from '@/components/LargeButton';
 import ScreenLayout from '@/components/ScreenLayout';
@@ -11,13 +10,6 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
 import { ActivityIndicator, Image, Text, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
-
-export const LoginIcons = [
-  <Google key="google" color='brandBlack' />,
-  <Facebook key="facebook" color='brandBlack' />,
-  <Apple key="apple" color='brandBlack' />,
-  <Phone key="phone" color='brandBlack' />,
-]
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
@@ -74,18 +66,6 @@ export default function LoginScreen() {
               <Link href={"/signup"}>Forgot password?</Link>
             </View>
             <LargeButton color='blue' type='navigate' onPress={signIn} text='Login' />
-            <View className="flex flex-row items-center w-full my-2 gap-3">
-              <View className='flex-1 h-[2px] bg-black/30 rounded-full' />
-              <Text className="mx-2 text-gray-500 font-semibold">Or login with</Text>
-              <View className='flex-1 h-[2px] bg-black/30 rounded-full' />
-            </View>
-            <View className='flex flex-row justify-between w-full items-center'>
-              {LoginIcons.map((icon) => (
-                <IconButton key={icon.key}>
-                  {icon}
-                </IconButton>
-              ))}
-            </View>
             <Text>Don't have an account? <Link href={"/signup"} className='font-bold text-blue'>Sign Up</Link></Text>
           </View>
         </BlurCard>

@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { Pressable, TextInput } from 'react-native';
 
-export default function InputButton({ children, placeholder, secure, value, onChangeText, autoCapitalize }: { children?: React.ReactNode, placeholder: string, secure: boolean, value: string, onChangeText: (text: string) => void, autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' }) {
+export default function InputButton({ children, placeholder, secure, value, onChangeText, autoCapitalize, rightElement }: { children?: React.ReactNode, placeholder: string, secure: boolean, value: string, onChangeText: (text: string) => void, autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters', rightElement?: React.ReactNode }) {
   const inputRef = useRef<TextInput>(null);
 
   return (
@@ -20,6 +20,7 @@ export default function InputButton({ children, placeholder, secure, value, onCh
         value={value}
         onChangeText={onChangeText}
       />
+      {rightElement}
     </Pressable>
   )
 }

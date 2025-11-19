@@ -76,5 +76,11 @@ export const Phone = ({ props, color }: { props?: any, color: ColorKeys }) => (
     <FontAwesome name="phone" size={24} color={colors[color]} {...props} />
 );
 export const Home = ({ props, color }: { props?: any, color: ColorKeys }) => (
-    <FontAwesome name="Home" size={24} color={colors[color]} {...props} />
+    <FontAwesome name="home" size={24} color={colors[color]} {...props} />
+);
+export const Eye = ({ props, color }: { props?: any, color: ColorKeys }) => (
+    <Feather name="eye" size={24} color={colors[color]} {...props} />
+);
+export const EyeOff = ({ props, color }: { props?: any, color: ColorKeys }) => (
+    <Feather name="eye-off" size={24} color={colors[color]} {...props} />
 );
