@@ -11,6 +11,10 @@ export default function TabLayout() {
         <Label>Patients</Label>
         <Icon sf="person.2.fill" drawable="custom_android_drawable" />
       </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="alimentos">
+        <Label>Alimentos</Label>
+        <Icon sf="leaf.fill" drawable="custom_android_drawable" />
+      </NativeTabs.Trigger>
       <NativeTabs.Trigger name="settings">
         <Label>Settings</Label>
         <Icon sf="gear" drawable="custom_android_drawable" />

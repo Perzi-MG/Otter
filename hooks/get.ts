@@ -19,7 +19,18 @@ export async function fetchPatientData(user: any, db: any, id: any) {
     console.error("Error fetching patient data: ", error);
     return null;
   }
-}
+};
+
+// export async function fetchFoodData(id: any) {
+//   try {
+//     const foodData = data.find((item) => item.id === id);
+//     return foodData;
+//   }
+//   catch (error) {
+//     console.error("Error fetching food data: ", error);
+//     return null;
+//   }
+// }
 
 
 export const usePatientList2 = (user: any, db: any) => {
