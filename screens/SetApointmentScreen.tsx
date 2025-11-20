@@ -3,7 +3,7 @@ import DropdownComponent from '@/components/Dropdown';
 import { LargeButton } from '@/components/LargeButton';
 import ScreenLayout from '@/components/ScreenLayout';
 import { useAuth } from '@/context/AuthContext';
-import usePatientList from '@/hooks/get';
+import { usePatientList2 } from '@/hooks/get';
 import { addAppointment } from '@/hooks/post';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
@@ -13,7 +13,7 @@ export default function SetApointmentScreen() {
 
   const router = useRouter()
   const { user, db } = useAuth()
-  const { patients } = usePatientList(user, db)
+  const { patients } = usePatientList2(user, db)
   const [data, setData] = useState<ApointmentData>()
   const [loading, setLoading] = useState(false)
 

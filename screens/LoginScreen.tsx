@@ -8,7 +8,7 @@ import { FIREBASE_AUTH } from '@/firebaseConfig';
 import { Link } from 'expo-router';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
-import { ActivityIndicator, Image, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, Image, Text, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
 export default function LoginScreen() {
@@ -21,6 +21,7 @@ export default function LoginScreen() {
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
+      Alert.alert('Error', 'No se pudo iniciar sesión');
     } finally {
       setLoading(false);
     }

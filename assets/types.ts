@@ -4,18 +4,19 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 type AllColorKeys = AppColorKeys;
 
 export type ButtonProps = React.PropsWithChildren<{
-    link?: string;
-    type?: "back" | "navigate" | "push";
-    color?: "blue" | "transparent-blue" | "transparent-white" | "aqua";
-    onPress?: () => void;
-    text?: string;
+  link?: string;
+  type?: "back" | "navigate" | "push";
+  color?: "blue" | "transparent-blue" | "transparent-white" | "aqua";
+  onPress?: () => void;
+  text?: string;
 }>;
 
 export type GradientTextProps = React.PropsWithChildren<{
-    text: string;
-    color1?: AllColorKeys;
-    color2?: AllColorKeys;
-    color3?: AllColorKeys;
+  text: string;
+  color1?: AllColorKeys;
+
+  color2?: AllColorKeys;
+  color3?: AllColorKeys;
 }>;
 
 export const insets = useSafeAreaInsets()
@@ -30,6 +31,10 @@ export interface Patient {
   FechaCreacion?: string;
   NumeroTelefonico?: number;
   Direccion?: any;
+  Peso?: number;
+  Altura?: number;
+  Edad?: number;
+  ActividadFisica?: string;
 }
 
 export type RawPatient = {
@@ -43,58 +48,35 @@ export type ApointmentData = {
   hour?: string;
 }
 
-export interface Antecedente {
-  ID_Antecedente: number;
-  ID_Paciente: number;
-  TipoAntecedente: 'Heredofamiliar' | 'Personal Patológico' | string;
-  Subtipo: string;
-  Descripcion: string;
-}
-
-export interface Consulta {
-  ID_Consulta: number;
-  ID_Paciente: number;
-  FechaConsulta: string;
-
-  // Exploración Física
-  PA_Valor?: string;
-  PA_Interpretacion?: string;
-  FrecuenciaCardiaca?: number;
-  FrecuenciaResp?: number;
-  SaturacionOxigeno?: number;
-  Temperatura?: number;
-  AparienciaGeneral?: string;
-
-  // Antropometría
-  Peso_kg?: number;
-  Talla_m?: number;
-  Circ_Cintura_cm?: number;
-  Circ_Cadera_cm?: number;
-  Pliegue_Tricipital?: number;
-
-  // Cálculos Nutricionales
-  GET_Mifflin?: number;
-  GET_HarrisBenedict?: number;
-  GET_OMS?: number;
-  Req_Agua_ml?: number;
-  Req_Fibra_g?: number;
-
-  // Cuadro Dietosintético
-  Porcentaje_HC?: number;
-  Kcal_HC?: number;
-  Gramos_HC?: number;
-  Porcentaje_Proteina?: number;
-  Kcal_Proteina?: number;
-  Gramos_Proteina?: number;
-  Porcentaje_Lipido?: number;
-  Kcal_Lipido?: number;
-  Gramos_Lipido?: number;
-}
-
-export interface EstudioBioquimico {
-  ID_Estudio: number;
-  ID_Consulta: number;
-  FechaEstudio: string;
-  RutaArchivo: string;
-  Interpretacion: string;
+export interface Alimento {
+  id: string;
+  "Grupo de alimentos": string;
+  ALIMENTO: string;
+  // Puede ser string ("1/2") o número (17), dependiendo del parseo
+  "Cantidad sugerida": string | number;
+  Unidad: string;
+  // Propiedades Nutricionales (pueden ser null si eran "ND")
+  "Peso bruto (g)": number | null;
+  "Peso neto (g)": number | null;
+  "Energía (kcal)": number | null;
+  "Proteína (g)": number | null;
+  "Lípidos (g)": number | null;
+  "Hidratos de carbono (g)": number | null;
+  "AG saturados (g)": number | null;
+  "AG monoinsaturados (g)": number | null;
+  "AG poli insaturados (g)": number | null;
+  "Colesterol (mg)": number | null;
+  "Azúcar (g)": number | null;
+  "Fibra (g)": number | null;
+  "Vitamina A (mg RE)": number | null;
+  "Acido Ascórbico (mg)": number | null;
+  "Ácido Fólico (mg)": number | null;
+  "Calcio (mg)": number | null;
+  "Hierro (mg)": number | null;
+  "Potasio (mg)": number | null;
+  "Sodio (mg)": number | null;
+  "Fósforo (mg)": number | null;
+  "Etanol (g)": number | null;
+  "IG": number | null;
+  "Carga glicémica": number | null;
 }

@@ -7,11 +7,11 @@ import OnlyIconButton from '@/components/OnlyIconButton';
 import ScreenLayout from '@/components/ScreenLayout';
 import { AppColors } from '@/constants/Colors';
 import { FIREBASE_AUTH, FIRESTORE_DB } from '@/firebaseConfig';
-import { Link, useRouter } from 'expo-router';
+import { Link } from 'expo-router';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { useState } from 'react';
-import { ActivityIndicator, Pressable, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, Pressable, Text, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
 const formFields = [
@@ -30,7 +30,6 @@ export default function SignUpScreen() {
     });
     const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-    const router = useRouter();
     const auth = FIREBASE_AUTH;
     const db = FIRESTORE_DB;
 
@@ -55,11 +54,9 @@ export default function SignUpScreen() {
                 createdAt: new Date().toISOString()
             };
             await setDoc(doc(db, 'users', user.uid), userData);
-            // Router will likely handle auth state change, but we can also navigate if needed
-            // router.replace('/home'); 
         } catch (error: any) {
             console.error(error);
-            alert('Error al registrarse: ' + error.message);
+            Alert.alert('Error', 'No se pudo registrar');
         } finally {
             setLoading(false);
         }
