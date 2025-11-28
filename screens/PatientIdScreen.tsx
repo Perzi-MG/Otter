@@ -1,10 +1,12 @@
 import { ArrowBack } from '@/assets/icons';
 import { Patient } from '@/assets/types';
+import BlurCard from '@/components/BlurCard';
 import { LargeButton } from '@/components/LargeButton';
 import OnlyIconButton from '@/components/OnlyIconButton';
 import ScreenLayout from '@/components/ScreenLayout';
 import { PatientDataLoader } from '@/components/Skeletons';
 import SquaredInput from '@/components/SquaredInput';
+import { calculateDietosynthetic, calculateIMC, calculateTDEE, getIMCClassification } from '@/constants/Nutrition';
 import { useAuth } from '@/context/AuthContext';
 import { fetchPatientData } from '@/hooks/get';
 import { doc, updateDoc } from 'firebase/firestore';
@@ -112,21 +114,87 @@ export default function PatientIdScreen({ id }: { id: any }) {
             />
           </View>
 
-          {/* <View className='w-full flex flex-col items-start opacity-50'>
-            <Text className='font-bold text-xl text-brand-black'>Energy Expenditure</Text>
-            <PatientData patientData={undefined} divider={true} dataName='Mifflin' />
-            <PatientData patientData={undefined} divider={true} dataName='Harris-Benedict' />
-            <PatientData patientData={undefined} dataName='WHO' />
-            <Text className='place-self-start w-full font-bold text-xl text-brand-black'>Water Inteke</Text>
-            <PatientData patientData={undefined} dataName='Formula' />
-            <Text className='place-self-start w-full font-bold text-xl text-brand-black'>Fiber Inteke</Text>
-            <PatientData patientData={undefined} dataName='Formula' />
-            <Text className='place-self-start w-full font-bold text-xl text-brand-black'>Calculations</Text>
-            <PatientData patientData={undefined} dataName='kcal/kg' />
-            <PatientData patientData={undefined} dataName='Protein/kg' />
-            <PatientData patientData={undefined} dataName='N2 grams' />
-            <PatientData patientData={undefined} dataName='KNP/g N2' />
-          </View> */}
+          {/* Nutrition Data Section */}
+          {patient && (patient.Peso || 0) > 0 && (patient.Altura || 0) > 0 ? (
+            <View className='w-full mt-4 p-4 bg-gray-50 rounded-xl'>
+              <Text className='text-xl font-bold text-brand-black mb-4'>Análisis Nutricional</Text>
+              <View className='mb-6'>
+                <Text className='text-lg font-semibold text-gray-700 mb-2'>IMC (Índice de Masa Corporal)</Text>
+                <BlurCard intensity={30} py={20} px={10}>
+
+                  <View>
+                    <Text className='text-7xl font-bold'>
+                      {calculateIMC(patient.Peso || 0, patient.Altura || 0)}
+                    </Text>
+                  </View>
+                  <View className='bg-blue-100 px-3 py-1 rounded-full'>
+                    <Text className='text-blue-800 font-medium'>
+                      {getIMCClassification(calculateIMC(patient.Peso || 0, patient.Altura || 0))}
+                    </Text>
+                  </View>
+                </BlurCard>
+              </View>
+              <BlurCard intensity={30} py={20} px={10}>
+                <Text className='text-lg font-semibold text-gray-700 mb-2'>Requerimiento Estimado</Text>
+                <View className='p-4'>
+                  <View className='flex-row justify-between items-end mb-4 border-b border-gray-100 pb-4'>
+                    <Text className='text-gray-600'>Calorías Diarias (TDEE)</Text>
+                    <Text className='text-2xl font-bold text-brand-black'>
+                      {calculateTDEE(patient.Peso || 0, patient.Altura || 0, patient.Edad || 25, patient.Sexo || 'Hombre', patient.ActividadFisica || 'Sedentario')} <Text className='text-sm font-normal text-gray-500'>kcal</Text>
+                    </Text>
+                  </View>
+
+                  <Text className='text-sm text-gray-500 mb-3'>Distribución Sugerida (50% C / 20% P / 30% G)</Text>
+
+                  {(() => {
+                    const tdee = calculateTDEE(patient.Peso || 0, patient.Altura || 0, patient.Edad || 25, patient.Sexo || 'Hombre', patient.ActividadFisica || 'Sedentario');
+                    const diet = calculateDietosynthetic(tdee, { carbsPercentage: 50, proteinPercentage: 20, fatPercentage: 30 });
+
+                    return (
+                      <View className='gap-3'>
+                        <View className='flex-row justify-between items-center'>
+                          <View className='flex-row items-center gap-2'>
+                            <View className='w-3 h-3 rounded-full bg-green-500' />
+                            <Text className='text-gray-700'>Carbohidratos</Text>
+                          </View>
+                          <View className='items-end'>
+                            <Text className='font-bold'>{diet.carbs.grams}g</Text>
+                            <Text className='text-xs text-gray-500'>{diet.carbs.calories} kcal</Text>
+                          </View>
+                        </View>
+
+                        <View className='flex-row justify-between items-center'>
+                          <View className='flex-row items-center gap-2'>
+                            <View className='w-3 h-3 rounded-full bg-red-500' />
+                            <Text className='text-gray-700'>Proteínas</Text>
+                          </View>
+                          <View className='items-end'>
+                            <Text className='font-bold'>{diet.protein.grams}g</Text>
+                            <Text className='text-xs text-gray-500'>{diet.protein.calories} kcal</Text>
+                          </View>
+                        </View>
+
+                        <View className='flex-row justify-between items-center'>
+                          <View className='flex-row items-center gap-2'>
+                            <View className='w-3 h-3 rounded-full bg-yellow-500' />
+                            <Text className='text-gray-700'>Grasas</Text>
+                          </View>
+                          <View className='items-end'>
+                            <Text className='font-bold'>{diet.fat.grams}g</Text>
+                            <Text className='text-xs text-gray-500'>{diet.fat.calories} kcal</Text>
+                          </View>
+                        </View>
+                      </View>
+                    );
+                  })()}
+                </View>
+              </BlurCard>
+            </View>
+          ) : (
+            <View className='w-full mt-4 p-4 bg-gray-50 rounded-xl items-center'>
+              <Text className='text-gray-500'>Completa los datos del paciente para ver el análisis nutricional.</Text>
+            </View>
+          )}
         </View>
       )}
     </ScreenLayout>

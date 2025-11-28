@@ -21,7 +21,7 @@ export default function HomeScreen() {
       <View className='flex-1 pt-5 w-full gap-16'>
         <View className='flex-row justify-between w-full items-center'>
           <View className='flex-col'>
-            <Text className='text-2xl font-medium'>Bienvenido,</Text>
+            <Text className='text-2xl font-medium'>Bienvenido</Text>
             <Text className='text-3xl font-bold'>{userData?.firstName}</Text>
           </View>
         </View>
