@@ -15,7 +15,7 @@ const PatientsScreen = () => {
 
             <View className='w-full flex-1 pt-5 flex-col gap-10 pb-10'>
                 <View className='relative flex-row justify-center items-center w-full'>
-                    <Text className='text-2xl font-bold text-brand-black'>Patients</Text>
+                    <Text className='text-2xl font-bold text-brand-black'>Pacientes</Text>
                 </View>
                 {loading ? (
                     <PatientsLoader />

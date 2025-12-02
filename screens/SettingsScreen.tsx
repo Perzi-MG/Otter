@@ -8,7 +8,7 @@ export default function SettingsScreen() {
     return (
         <ScreenLayout>
             <LargeButton color='aqua' onPress={() => auth.signOut()}>
-                <Text className="text-white text-xl font-semibold">Sign Out</Text>
+                <Text className="text-white text-xl font-semibold">Cerrar sesión</Text>
             </LargeButton>
         </ScreenLayout>
     )

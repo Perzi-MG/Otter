@@ -4,11 +4,11 @@ export default function TabLayout() {
   return (
     <NativeTabs backgroundColor={'white'} minimizeBehavior='onScrollDown'>
       <NativeTabs.Trigger name="home">
-        <Label>Home</Label>
+        <Label>Inicio</Label>
         <Icon sf="house.fill" drawable="custom_android_drawable" />
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="patients">
-        <Label>Patients</Label>
+        <Label>Pacientes</Label>
         <Icon sf="person.2.fill" drawable="custom_android_drawable" />
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="alimentos">
@@ -16,11 +16,11 @@ export default function TabLayout() {
         <Icon sf="leaf.fill" drawable="custom_android_drawable" />
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="settings">
-        <Label>Settings</Label>
+        <Label>Ajustes</Label>
         <Icon sf="gear" drawable="custom_android_drawable" />
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="addPatient" role='search'>
-        <Label>Add Patient</Label>
+        <Label>Añadir Paciente</Label>
         <Icon sf="person.fill.badge.plus" drawable="custom_android_drawable" />
       </NativeTabs.Trigger>
     </NativeTabs>

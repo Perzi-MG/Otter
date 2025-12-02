@@ -52,7 +52,7 @@ export default function SetApointmentScreen() {
   return (
     <ScreenLayout>
       <View className='flex-1 flex-col gap-10'>
-        <Text className='text-3xl font-bold left-28'>Agregar Cita</Text>
+        <Text className='text-3xl font-bold left-28'>Agregar cita</Text>
         <View className='flex-col gap-10'>
           <DropdownComponent
             data={patients}

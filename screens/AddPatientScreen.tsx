@@ -55,7 +55,7 @@ export default function AddPatientScreen() {
       <ScreenLayout scroll>
 
         <View className='flex-1 flex-col justify-center gap-5 mt-10 mb-16'>
-          <Text className="text-3xl font-bold self-center">Añadir Paciente</Text>
+          <Text className="text-3xl font-bold self-center">Añadir paciente</Text>
           <SquaredInput
             label="Nombre(s)"
             value={patient.Nombre || ''}
@@ -80,7 +80,7 @@ export default function AddPatientScreen() {
             data={Sexo}
             onValueChange={(text) => handleInputChange('Sexo', text)} />
           <SquaredInput
-            label="Número Telefónico"
+            label="Número telefónico"
             value={patient.NumeroTelefonico?.toString() || ''}
             onChangeText={(text) => handleInputChange('NumeroTelefonico', text)}
             keyboardType="phone-pad"

@@ -100,7 +100,7 @@ export default function PatientIdScreen({ id }: { id: any }) {
             <View className='w-[100%]'>
               <SquaredInput
                 value={patient?.ActividadFisica}
-                label='Actividad Física'
+                label='Actividad física'
                 onChangeText={(text) => setPatient({ ...patient!, ActividadFisica: text })}
               />
             </View>
@@ -108,7 +108,7 @@ export default function PatientIdScreen({ id }: { id: any }) {
 
           <View className='w-full'>
             <LargeButton
-              text={saving ? 'Guardando...' : 'Guardar Cambios'}
+              text={saving ? 'Guardando...' : 'Guardar cambios'}
               onPress={handleUpdate}
               color='blue'
             />
@@ -117,7 +117,7 @@ export default function PatientIdScreen({ id }: { id: any }) {
           {/* Nutrition Data Section */}
           {patient && (patient.Peso || 0) > 0 && (patient.Altura || 0) > 0 ? (
             <View className='w-full mt-4 p-4 bg-gray-50 rounded-xl'>
-              <Text className='text-xl font-bold text-brand-black mb-4'>Análisis Nutricional</Text>
+              <Text className='text-xl font-bold text-brand-black mb-4'>Análisis nutricional</Text>
               <View className='mb-6'>
                 <Text className='text-lg font-semibold text-gray-700 mb-2'>IMC (Índice de Masa Corporal)</Text>
                 <BlurCard intensity={30} py={20} px={10}>
@@ -135,7 +135,7 @@ export default function PatientIdScreen({ id }: { id: any }) {
                 </BlurCard>
               </View>
               <BlurCard intensity={30} py={20} px={10}>
-                <Text className='text-lg font-semibold text-gray-700 mb-2'>Requerimiento Estimado</Text>
+                <Text className='text-lg font-semibold text-gray-700 mb-2'>Requerimiento estimado</Text>
                 <View className='p-4'>
                   <View className='flex-row justify-between items-end mb-4 border-b border-gray-100 pb-4'>
                     <Text className='text-gray-600'>Calorías Diarias (TDEE)</Text>

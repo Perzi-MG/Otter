@@ -84,13 +84,13 @@ export default function HomeScreen() {
             <BlurCard intensity={30} py={20} px={10}>
               <View className='w-full flex-row items-center gap-3'>
                 <Notification color='brandBlack' />
-                <Text>Notificacion</Text>
+                <Text>Notificación</Text>
               </View>
             </BlurCard>
             <BlurCard intensity={30} py={20} px={10}>
               <View className='w-full flex-row items-center gap-3'>
                 <Notification color='brandBlack' />
-                <Text>Notificacion</Text>
+                <Text>Notificación</Text>
               </View>
             </BlurCard>
           </View>

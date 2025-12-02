@@ -62,12 +62,8 @@ export default function LoginScreen() {
                 <Lock color='gray' />
               </InputButton>
             </View>
-            <View className="flex flex-row justify-between w-full px-2">
-              <Text>Remember me</Text>
-              <Link href={"/signup"}>Forgot password?</Link>
-            </View>
-            <LargeButton color='blue' type='navigate' onPress={signIn} text='Login' />
-            <Text>Don't have an account? <Link href={"/signup"} className='font-bold text-blue'>Sign Up</Link></Text>
+            <LargeButton color='blue' type='navigate' onPress={signIn} text='Iniciar sesión' />
+            <Text>No tienes una cuenta? <Link href={"/signup"} className='font-bold text-blue'>Regístrate</Link></Text>
           </View>
         </BlurCard>
       </ScreenLayout>
