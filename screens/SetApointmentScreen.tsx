@@ -7,7 +7,7 @@ import { usePatientList2 } from '@/hooks/get';
 import { addAppointment } from '@/hooks/post';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Alert, Text, View } from 'react-native';
 
 export default function SetApointmentScreen() {
 
@@ -39,12 +39,17 @@ export default function SetApointmentScreen() {
   const handleSubmit = async () => {
     if (!user) return;
     setLoading(true);
+    if (!data || !data.Id_patient || !data.date || !data.hour) {
+      Alert.alert('Error', 'Por favor complete todos los campos');
+      setLoading(false);
+      return;
+    }
     addAppointment(data, user, db)
       .then(() =>
         router.push('/home')
       )
       .catch(error => {
-        console.error("Error posting appointment data: ", error);
+        Alert.alert('Error', 'Error guardando la cita');
       })
       .finally(() => setLoading(false))
   }

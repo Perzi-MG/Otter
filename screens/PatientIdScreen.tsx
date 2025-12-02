@@ -44,7 +44,6 @@ export default function PatientIdScreen({ id }: { id: any }) {
       });
       Alert.alert('Éxito', 'Datos actualizados correctamente');
     } catch (error) {
-      console.error("Error updating patient: ", error);
       Alert.alert('Error', 'No se pudieron actualizar los datos');
     } finally {
       setSaving(false);

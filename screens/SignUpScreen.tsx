@@ -55,7 +55,6 @@ export default function SignUpScreen() {
             };
             await setDoc(doc(db, 'users', user.uid), userData);
         } catch (error: any) {
-            console.error(error);
             Alert.alert('Error', 'No se pudo registrar');
         } finally {
             setLoading(false);

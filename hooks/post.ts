@@ -1,5 +1,6 @@
 import { ApointmentData, Patient } from "@/assets/types";
 import { addDoc, collection } from "firebase/firestore";
+import { Alert } from "react-native";
 
 export async function addPatient(patientData: Patient, user: any, db: any) {
     try {
@@ -16,7 +17,7 @@ export async function addPatient(patientData: Patient, user: any, db: any) {
         await addDoc(collection(db, 'users', user.uid, 'patients'), patient);
         return
     } catch (error) {
-        console.error('Error guardando paciente:', error);
+        Alert.alert('Error', 'No se pudo guardar el paciente');
         return null
     }
 }
@@ -28,7 +29,7 @@ export async function addAppointment(appointmentData: ApointmentData | undefined
         await addDoc(collection(db, 'users', user.uid, 'appointments'), appointment);
         return
     } catch (error) {
-        console.error('Error guardando cita:', error);
+        Alert.alert('Error', 'Error guardando la cita');
         return null
     }
 }

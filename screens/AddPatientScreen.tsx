@@ -10,7 +10,7 @@ import { FIRESTORE_DB } from '@/firebaseConfig'
 import { addPatient } from '@/hooks/post'
 import { useRouter } from 'expo-router'
 import { useState } from 'react'
-import { ActivityIndicator, Text, View } from 'react-native'
+import { ActivityIndicator, Alert, Text, View } from 'react-native'
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated'
 
 
@@ -32,6 +32,11 @@ export default function AddPatientScreen() {
   const handleSubmit = async () => {
     if (!user) return;
     setLoading(true);
+    if (!patient.Nombre || !patient.ApellidoPaterno || !patient.FechaNacimiento || !patient.Sexo || !patient.NumeroTelefonico || !patient.Direccion || patient.ApellidoMaterno) {
+      Alert.alert('Alerta', 'Por favor complete todos los campos obligatorios');
+      setLoading(false);
+      return;
+    }
     addPatient(patient, user, db)
       .then(() =>
         router.push('/(app)/(tabs)/patients')
